@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- NINJAS -->
+
+    <string-array name="villagefeu">
+        <item>"Village du feu"</item>
+        <item>"bdd_p_0_feu"</item>
+    </string-array>
+
+    <string-array name="villagebrume">
+        <item>"Village de la brume"</item>
+        <item>"bdd_p_0_brume"</item>
+    </string-array>
+
+    <string-array name="villagefoudre">
+        <item>"Village de la foudre"</item>
+        <item>"bdd_p_0_foudre"</item>
+    </string-array>
+
+    <string-array name="villageterre">
+        <item>"Village de la terre"</item>
+        <item>"bdd_p_0_terre"</item>
+    </string-array>
+
+    <string-array name="villagevent">
+        <item>"Village du vent"</item>
+        <item>"bdd_p_0_vent"</item>
+    </string-array>
+
+
+    <array name="personnages_0_0">
+        <item>@array/Hokage</item>
+        <item>@array/Yakishio</item>
+        <item>@array/Reigen</item>
+        <item>@array/Kohana</item>
+        <item>@array/Kuro</item>
+    </array>
+
+    <array name="personnages_0_1">
+        <item>@array/Mizukage</item>
+        <item>@array/Kichiro</item>
+        <item>@array/Okori</item>
+    </array>
+
+    <array name="personnages_0_2">
+        <item>@array/Raikage</item>
+    </array>
+
+    <array name="personnages_0_3">
+        <item>@array/Tsuchikage</item>
+    </array>
+
+    <array name="personnages_0_4">
+        <item>@array/Kazekage</item>
+    </array>
+
+    <!-- END NINJAS -->
+
+    <!-- HEROS -->
+
+    <string-array name="ecoletokyo">
+        <item>"Ecole de Tokyo"</item>
+        <item>"bdd_p_1_tokyo"</item>
+    </string-array>
+
+    <array name="personnages_1_0">
+        <item>@array/raton</item>
+    </array>
+
+    <string-array name="ecolekyoto">
+        <item>"Ecole de Kyoto"</item>
+        <item>"bdd_p_1_kyoto"</item>
+    </string-array>
+
+    <array name="personnages_1_1">
+        <item>@array/allmight</item>
+    </array>
+
+    <!-- END HEROS -->
+
+</resources>

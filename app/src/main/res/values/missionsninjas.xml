@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <string-array name="missions_0_0">
+        <item>"0/Un document secret/10/icone_document/5/10/20"</item>
+   </string-array>
+
+    <string-array name="missions_0_1">
+    </string-array>
+
+    <string-array name="missions_0_2">
+    </string-array>
+
+    <string-array name="missions_0_3">
+    </string-array>
+
+    <string-array name="missions_0_4">
+    </string-array>
+
+</resources>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ECRAN 0 -->
+
+    <string-array name="intro_persos0">
+        <item>"0/1/Okori"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues0">
+        <item>"1/0/Bienvenue à toi, je m'appelle Okori, je suis originaire du village du brouillard. C'est une des 5 grandes parties qui composent le pays des ninjas."</item>
+        <item>"0/0/Notre monde s'est divisé après les guerres, ce qui a formé de vastes pays appartenants chacun à un clan unique.. Comme le clan des ninjas ou celui des héros par exemple."</item>
+        <item>"0/0/Aujourd'hui, certaines personnes cherchent encore à réunir tous les clans en accomplissant des hauts-faits et en grimpant dans l'estime de chaque communauté."</item>
+        <item>"1/0/Si toi aussi tu veux essayer de sauver ce monde, je suis prête à t'aider et à te guider jusqu'à ce que tu trouves tes propres repères."</item>
+        <item>"1/0/Il va falloir que nous réunissions les personnages les plus influentes de chaque pays pour esperer faire changer les choses."</item>
+        <item>"1/0/Voyons déjà par quel pays nous allons commencer, choisis notre prochaine destination capitaine !"</item>
+    </string-array>
+
+    <!-- ECRAN 1 -->
+
+    <string-array name="intro_persos_0">
+        <item>"0/1/Okori"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_0">
+        <item>"1/0/C'est la première fois que tu viens au pays des ninjas, personne n'a encore entendu parler de toi et ça il va falloir changer ça !"</item>
+        <item>"1/0/Ce pays est partagé entre 5 villages qui se disputent les terres et les meilleurs ninjas depuis que le monde s'est divisé."</item>
+        <item>"1/0/Chaque pays est dirigé par un ninja d'exception, il va falloir les convaincre si nous voulons pénetrer dans l'enceinte de leurs villages"</item>
+        <item>"1/0/Essayons déjà d'entrer en contact avec un des chefs de village, ils ne sont pas tous ouverts aux étrangers. Où allons nous capitaine ?"</item>
+    </string-array>
+
+    <string-array name="intro_persos_1">
+        <item>"0/1/Okori"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_1">
+        <item>"1/0/Nous sommes dans le pays des héros, il est divisé en plusieurs écoles qui cherchent à recruter et former les meilleurs élèves héros du pays. Tu vas devoir leur montrer qui tu es !"</item>
+        <item>"1/0/D'après ce que j'ai entendu, le pays des héros est assez différent des autres car ce ne sont pas les écoles qui sont en compétition mais chaque individu de ce pays."</item>
+        <item>"1/0/Si tu veux qu'on reconnaisse ta valeur, il va falloir que tu deviennes un des plus grands héros de ce pays en triomphant de tous les autres."</item>
+        <item>"1/0/Nous allons devoir intégrer une école, laquelle te tente le plus ?"</item>
+    </string-array>
+
+    <!-- ECRAN 2 -->
+
+    <string-array name="intro_persos_0_0">
+        <item>"0/1/Okori"</item>
+        <item>"0/0/Hokage"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_0_0">
+        <item>"1/1/Bienvenue à toi, je suis Hiruzen, troisième chef du village du feu, je suis content de voir de nouveaux visages dans mon village./3/3"</item>
+        <item>"1/1/Ici nous valorisons le respect de nos compagnons d'arme et des autres habitants du village, tu peux rejoindre mes hommes avec plaisir si tu partages nos idéaux./3/3"</item>
+        <item>"0/1/Commences tout d'abord par apporter ce document aux services secrets si tu tiens à nous rejoindre, nous verrons ce qu'on pourra te confier par la suite./3/3"</item>
+        <item>"0/0/Super ! Ce dirigeant est très ouvert aux nouveaux venus, allons lui montrer de quoi nous sommes capables et terminons cette mission en un rien de temps !"</item>
+    </string-array>
+
+    <string-array name="intro_persos_0_1">
+        <item>"0/1/Okori"</item>
+        <item>"0/1/Mizukage"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_0_1">
+        <item>"1/0/Le village de la brume où j'ai grandi..! Je connais le chef du village, je pense qu'il t'accueillera avec plaisir, allons le rencontrer !"</item>
+        <item>"1/1/Bienvenue chez moi, si tu connais Okori, je pense que je peux te faire confiance. Malgrès cela, j'aimerai que tu me prouves ta bonne foi."</item>
+        <item>"1/1/Si tu veux devenir un aspirant de notre village, commences par prouver à l'instructeur de quoi tu es capable."</item>
+        <item>"0/0/Allons voir l'instructeur, j'ai aussi hâte de voir ce que tu vaux !"</item>
+    </string-array>
+
+    <string-array name="intro_persos_0_2">
+        <item>"0/1/Okori"</item>
+        <item>"0/2/Raikage"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_0_2">
+        <item>"1/1/Aaaaargh ! Si tu crois que nous recrutons n'importe qui dans notre village, tu te trompes lourdement ! Capturez le et enfermez le au cachot ! Hors de ma vue !!"</item>
+        <item>"0/0/..."</item>
+        <item>"0/0/Excuses moi, j'aurais du te prévenir que le dirigeant de ce pays avait un caractère bien à lui.. Il faudrait lui prouver ta valeur si tu veux qu'il t'écoute.."</item>
+        <item>"0/0/Il faut trouver un moyen de nous échapper et nous essaierons de lui reparler ensuite !"</item>
+    </string-array>
+
+    <string-array name="intro_persos_0_3">
+        <item>"0/1/Okori"</item>
+        <item>"0/3/Tsuchikage"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_0_3">
+        <item>"1/1/Bienvenue dans mon village, nous sommes le peuple de la terre, je ne laisse rentrer ici que les personnes en qui je peux avoir confiance."</item>
+        <item>"1/1/Va trouver mon fils, il saura me dire si nous pouvons te donner ta chance. Ne reviens pas avant que cela ne soit fait et qu'il ait donnné son accord."</item>
+        <item>"0/0/Son fils est très connu dans le pays des ninjas, car il maitrise tous les élèments en même temps, c'est impressionnant ! Allons le trouver.."</item>
+    </string-array>
+
+    <string-array name="intro_persos_0_4">
+        <item>"0/1/Okori"</item>
+        <item>"0/4/Kazekage"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_0_4">
+        <item>"1/1/Bienvenue au village du vent, quelque chose me dit que tu es un grand ninja au fond de toi, je veux bien t'accueillir en tant qu'aspirant de mon village."</item>
+        <item>"1/1/Je vais suivre ton évolution de près, j'espère que tu seras à la hauteur de mes esperances. Commences par t'inscrire au registre et devient un habitant aux yeux de tous."</item>
+        <item>"0/0/C'était plutôt facile, je ne connaissais pas ce nouveau dirigeant car il est assez jeune, mais en tous cas je l'aime bien !"</item>
+    </string-array>
+
+    <!-- HEROS -->
+
+    <string-array name="intro_persos_1_0">
+        <item>"0/1/Okori"</item>
+        <item>"1/0/Raton"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_1_0">
+        <item>"1/1/Bienvenue dans mon école ! Si tu sais te défendre et que tu désires la paix dans le monde, je te formerai avec grand plaisir !"</item>
+        <item>"1/1/Tu peux aller trouver le professeur des recrues, il te donnera un premier cours et jaugera tes capacités."</item>
+        <item>"0/0/De tout ce que j'ai pu voir de ce pays pour l'instant, les héros ont l'air d'être des gens chaleureux, ça fait plaisir à voir ! Allons voir ce fameux professeur."</item>
+    </string-array>
+
+    <string-array name="intro_persos_1_1">
+        <item>"0/1/Okori"</item>
+        <item>"1/1/Allmight"</item>
+    </string-array>
+
+    <string-array name="intro_dialogues_1_1">
+        <item>"1/1/Bienvenue à toi !!! Si tu veux devenir le plus grand héros de ce monde, tu frappes à la bonne porte ! Je forme les meilleurs élèves depuis des années !"</item>
+        <item>"1/1/Montres moi ce dont tu es capable et nous commencerons ton apprentissage !"</item>
+        <item>"0/0/Il est très énergique celui là, mais j'ai l'impression qu'il est vraiment très puissant aussi, donnes tout ce que tu as !"</item>
+    </string-array>
+
+</resources>

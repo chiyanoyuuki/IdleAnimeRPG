@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Okori">
+        <item>"Okori"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="Hokage">
+        <item>"Hokage"</item>
+        <item>"1"</item>
+    </string-array>
+    <string-array name="Raikage">
+        <item>"Raikage"</item>
+        <item>"1"</item>
+    </string-array>
+    <string-array name="Mizukage">
+        <item>"Mizukage"</item>
+        <item>"1"</item>
+    </string-array>
+    <string-array name="Tsuchikage">
+        <item>"Tsuchikage"</item>
+        <item>"1"</item>
+    </string-array>
+    <string-array name="Kazekage">
+        <item>"Kazekage"</item>
+        <item>"1"</item>
+    </string-array>
+
+    <string-array name="Kichiro">
+        <item>"Kichiro"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="Kohana">
+        <item>"Kohana"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="Kuro">
+        <item>"Kuro"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="Reigen">
+        <item>"Reigen"</item>
+        <item>"0"</item>
+    </string-array>
+
+    <string-array name="Yakishio">
+        <item>"Yakishio"</item>
+        <item>"0"</item>
+    </string-array>
+
+</resources>

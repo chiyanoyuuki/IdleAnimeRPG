@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="animes">
+        <item>@array/ninjas</item>
+        <item>@array/heros</item>
+        <item>@array/titans</item>
+    </array>
+
+    <!-- NINJAS -->
+
+    <string-array name="ninjas">
+        <item>Pays des ninjas</item>
+        <item>bdd_a_ninjas</item>
+        <item>1</item>
+        <item>village</item>
+        <item>0</item>
+    </string-array>
+
+    <array name="parties_0">
+        <item>@array/villagefeu</item>
+        <item>@array/villagebrume</item>
+        <item>@array/villagefoudre</item>
+        <item>@array/villageterre</item>
+        <item>@array/villagevent</item>
+    </array>
+
+    <!-- END NINJAS -->
+
+    <!-- HEROS -->
+
+    <string-array name="heros">
+        <item>Pays des heros</item>
+        <item>bdd_a_heros</item>
+        <item>1</item>
+        <item>école</item>
+        <item>1</item>
+    </string-array>
+
+
+    <array name="parties_1">
+        <item>@array/ecoletokyo</item>
+        <item>@array/ecolekyoto</item>
+    </array>
+
+    <!-- END HEROS -->
+
+    <string-array name="titans">
+        <item>Pays des titans</item>
+        <item>bdd_anime_titans</item>
+        <item>0</item>
+        <item>enceinte</item>
+        <item>1</item>
+    </string-array>
+
+    <array name="parties_2">
+    </array>
+
+</resources>
