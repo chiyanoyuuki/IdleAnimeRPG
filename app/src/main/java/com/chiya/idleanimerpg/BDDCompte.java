@@ -16,7 +16,7 @@ public class BDDCompte
         pseudo      = c.getString(1);
         persoid     = c.getLong(2);
         ressources  = c.getLong(3);
-        started     = c.getLong(4)==1;
+        started     = c.getLong(4)!=0;
     }
 
     public long id()        {return id;}

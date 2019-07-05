@@ -1,8 +1,10 @@
 package com.chiya.idleanimerpg;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
@@ -16,7 +18,7 @@ import androidx.core.content.ContextCompat;
 
 public class Mission
 {
-    private long time = 4000;
+    private long time;
     private ImageView barreprogress, barre2;
     private TextView barre, start;
     private long startTime;
@@ -57,24 +59,37 @@ public class Mission
             handler.postDelayed(this, 500);
         }
     };
+    private Partie partie;
     private LinearLayout mission;
     private Context context;
+    private BDDMission bddmission;
+    private FrameLayout background;
 
-    public Mission(Context context)
+    public Mission(Partie partie, Context context, BDDMission bddmission)
     {
+        this.partie = partie;
+        this.bddmission = bddmission;
+        time = bddmission.temps();
         this.context = context;
         init();
     }
 
     private void init()
     {
-        mission = new LinearLayout(context);
-        mission.setPadding(50,20,30,20);
-        mission.setOrientation(LinearLayout.VERTICAL);
+        background = new FrameLayout(context);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,250);
         lp.setMargins(0,0,0,20);
-        mission.setLayoutParams(lp);
-        mission.setBackground(ContextCompat.getDrawable(context,R.drawable.fullbg2));
+        background.setLayoutParams(lp);
+
+        ImageView fondmission = new ImageView(context);
+        fondmission.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        fondmission.setBackground(ContextCompat.getDrawable(context,R.drawable.fullbg2));
+        fondmission.setAlpha(0.7f);
+
+        mission = new LinearLayout(context);
+        mission.setPadding(50,20,30,20);
+        mission.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mission.setOrientation(LinearLayout.VERTICAL);
 
         FrameLayout progression = new FrameLayout(context);
         LinearLayout apercuhaut = new LinearLayout(context);
@@ -137,25 +152,32 @@ public class Mission
 
         fleche.setScaleType(ImageView.ScaleType.FIT_XY);
 
-        progression.setPadding(0,30,20,0);
-        barre.setPadding(0,0,0,20);
-        nommission.setPadding(20,0,0,0);
-        start.setPadding(0,0,0,10);
+        progression.setPadding  (0,30,20,0);
+        barre.setPadding        (0,0,0,20);
+        nommission.setPadding   (20,0,0,0);
+        start.setPadding        (0,0,0,10);
 
+        long time = bddmission.temps();
 
-        nommission.setText("Un document secret");
-        barre.setText("00:00:30");
-        start.setText("Lancer");
-        nbpartie.setText("+40");
-        nbpays.setText("+20");
-        nbmonde.setText("+10");
+        int seconds = (int) (time / 1000);
+        int minutes = seconds / 60;
+        int heures = minutes / 60;
+        seconds = seconds % 60;
+        minutes = minutes % 60;
+
+        barre.setText       (String.format("%02d:%02d:%02d", heures, minutes, seconds));
+        nommission.setText  (bddmission.nom());
+        start.setText       ("Lancer");
+        nbpartie.setText    ("+"+bddmission.rpartie());
+        nbpays.setText      ("+"+bddmission.rpays());
+        nbmonde.setText     ("+"+bddmission.rmonde());
 
         nommission.setTextColor(Color.parseColor("#ffffff"));
-        barre.setTextColor(Color.parseColor("#ffffff"));
-        start.setTextColor(Color.parseColor("#ffffff"));
-        nbpartie.setTextColor(Color.parseColor("#ffffff"));
-        nbpays.setTextColor(Color.parseColor("#ffffff"));
-        nbmonde.setTextColor(Color.parseColor("#ffffff"));
+        barre.setTextColor(Color.parseColor     ("#ffffff"));
+        start.setTextColor(Color.parseColor     ("#ffffff"));
+        nbpartie.setTextColor(Color.parseColor  ("#ffffff"));
+        nbpays.setTextColor(Color.parseColor    ("#ffffff"));
+        nbmonde.setTextColor(Color.parseColor   ("#ffffff"));
 
         nbpartie.setTextSize(12);
         nbpays.setTextSize(12);
@@ -196,6 +218,11 @@ public class Mission
                     start.setBackground(ContextCompat.getDrawable(context,R.drawable.bouton2));
                     barreprogress.setImageResource(R.drawable.progressr);
                 }
+                else if(tmp.getText().equals("Finir"))
+                {
+                    partie.finishMission(bddmission);
+
+                }
             }
         });
 
@@ -224,7 +251,10 @@ public class Mission
 
         mission.addView(apercuhaut);
         mission.addView(apercubas);
+
+        background.addView(fondmission);
+        background.addView(mission);
     }
 
-    public LinearLayout layout(){return mission;}
+    public FrameLayout layout(){return background;}
 }

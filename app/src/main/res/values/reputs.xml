@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="level_reputs">
+        <item>"10/10/10"</item>
+        <item>"500/300/200"</item>
+        <item>"10000/5000/2500"</item>
+        <item>"150000/50000/20000"</item>
+        <item>"500000/200000/100000"</item>
+    </string-array>
+
+    <string-array name="level_reput">
+        <item>"Débutant"</item>
+        <item>"Initié"</item>
+        <item>"Soldat du monde"</item>
+        <item>"Chevalier de l'espoir"</item>
+        <item>"Souverain des royaumes"</item>
+    </string-array>
+
+    <string-array name="level_reput_0">
+        <item>"Aspirant ninja"</item>
+        <item>"Ninja supérieur"</item>
+        <item>"Ninja d'élite"</item>
+        <item>"Ninja légendaire"</item>
+        <item>"Ninja ultime"</item>
+    </string-array>
+
+    <string-array name="level_reput_1">
+        <item>"Aspirant héros"</item>
+        <item>"Héros provisoire"</item>
+        <item>"Héros professionnel"</item>
+        <item>"Grand Héros"</item>
+        <item>"Héros légendaire"</item>
+    </string-array>
+
+    <string-array name="level_reput_2">
+    </string-array>
+
+    <string-array name="level_reput_0_0">
+        <item>"Aspirant du feu"</item>
+        <item>"Initié des braises"</item>
+        <item>"Ninja incandescant"</item>
+        <item>"Sage des flammes"</item>
+        <item>"Dragon de feu"</item>
+    </string-array>
+
+    <string-array name="level_reput_0_1">
+        <item>"Aspirant du feu"</item>
+        <item>"Initié des braises"</item>
+        <item>"Ninja incandescant"</item>
+        <item>"Sage des flammes"</item>
+        <item>"Dragon de feu"</item>
+    </string-array>
+
+    <string-array name="level_reput_0_2">
+        <item>"Aspirant du feu"</item>
+        <item>"Initié des braises"</item>
+        <item>"Ninja incandescant"</item>
+        <item>"Sage des flammes"</item>
+        <item>"Dragon de feu"</item>
+    </string-array>
+
+    <string-array name="level_reput_0_3">
+        <item>"Aspirant du feu"</item>
+        <item>"Initié des braises"</item>
+        <item>"Ninja incandescant"</item>
+        <item>"Sage des flammes"</item>
+        <item>"Dragon de feu"</item>
+    </string-array>
+
+    <string-array name="level_reput_0_4">
+        <item>"Aspirant du feu"</item>
+        <item>"Initié des braises"</item>
+        <item>"Ninja incandescant"</item>
+        <item>"Sage des flammes"</item>
+        <item>"Dragon de feu"</item>
+    </string-array>
+
+    <string-array name="level_reput_1_0">
+        <item>"Apprenti héros de Tokyo"</item>
+        <item>"Héros temporaire de Tokyo"</item>
+        <item>"Héros pro de Tokyo"</item>
+        <item>"Grand héros de Tokyo"</item>
+        <item>"Top héros de Tokyo"</item>
+    </string-array>
+
+    <string-array name="level_reput_1_1">
+        <item>"Apprenti héros de Tokyo"</item>
+        <item>"Héros temporaire de Tokyo"</item>
+        <item>"Héros pro de Tokyo"</item>
+        <item>"Grand héros de Tokyo"</item>
+        <item>"Top héros de Tokyo"</item>
+    </string-array>
+
+</resources>

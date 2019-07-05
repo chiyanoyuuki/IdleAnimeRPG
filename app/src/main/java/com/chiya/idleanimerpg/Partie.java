@@ -11,17 +11,20 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 public class Partie extends Master
 {
+    private BDDAnime anime;
     private BDDPartie partie;
     private FrameLayout top;
-    private LinearLayout missions, personnages, stats, centerlayout;
+    private LinearLayout missions, personnages, stats, centerlayout, hautmissions;
     private TextView btn01, btn02, btn03;
     private int state;
+    private FrameLayout persos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,14 +32,17 @@ public class Partie extends Master
         super.onCreate(savedInstanceState);
         String animeid = getIntent().getStringExtra("animeid");
         String partieid = getIntent().getStringExtra("partieid");
+        anime = db.selectAnime(animeid);
         partie = db.selectPartie(animeid,partieid);
         addViews();
+        //addForeground();
         verifStart();
     }
 
     public void addViews()
     {
         mainlayout.addView(addHeader());
+        mainlayout.addView(addReputs(partie.animeid(),partie.id()));
         centerlayout = new LinearLayout(this);
         centerlayout.setOrientation(LinearLayout.VERTICAL);
         centerlayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
@@ -51,14 +57,9 @@ public class Partie extends Master
 
     public void verifStart()
     {
-        if(!compte.started())
-        {
-            Resources resources = getResources();
-            String[] persos     = resources.getStringArray(getResources().getIdentifier("intro_persos_"     +partie.animeid()+"_"+partie.id(),"array",packageName));
-            String[] dialogues  = resources.getStringArray(getResources().getIdentifier("intro_dialogues_"  +partie.animeid()+"_"+partie.id(),"array",packageName));
-            Dialogue textes = new Dialogue(this, db, persos,dialogues);
-            background.addView(textes.getView());
-        }
+        ArrayList<BDDDialogue> dialogues = db.selectAllDialogues(""+partie.animeid(),""+partie.id());
+        dialogue = new Dialogue(this, db, dialogues,this);
+        background.addView(dialogue.getView());
     }
 
     private void addTop()
@@ -82,11 +83,11 @@ public class Partie extends Master
         if(state!=i)
         {
             if(state==0)        {centerlayout.removeView(missions);     btn01.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));}
-            else if(state==1)   {centerlayout.removeView(personnages);  btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));}
+            else if(state==1)   {centerlayout.removeView(persos);       btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));}
             else if(state==2)   {centerlayout.removeView(stats);        btn03.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));}
 
             if(i==0)            {centerlayout.addView(missions);        btn01.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
-            else if(i==1)       {centerlayout.addView(personnages);     btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
+            else if(i==1)       {centerlayout.addView(persos);          btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
             else if(i==2)       {centerlayout.addView(stats);           btn03.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
 
             state = i;
@@ -113,7 +114,7 @@ public class Partie extends Master
         });
 
         btn02 = new TextView(this);
-        fmtBtn(btn02,"Personnages");
+        fmtBtn(btn02,"Habitants");
         btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));
         btn02.setOnClickListener(new View.OnClickListener()
         {
@@ -161,21 +162,54 @@ public class Partie extends Master
     private void createMissions()
     {
         missions = new LinearLayout(this);
-        missions.setOrientation(LinearLayout.VERTICAL);
-        missions.setBackground(ContextCompat.getDrawable(this,R.drawable.testbg));
-        missions.setPadding(50,50,50,0);
         missions.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
+        missions.setOrientation(LinearLayout.VERTICAL);
 
-        Cursor cursor = db.selectAllMissions(""+partie.animeid(),""+partie.id());
+        FrameLayout hautimg = new FrameLayout(this);
+        hautimg.setBackgroundColor(Color.parseColor("#505050"));
+        hautimg.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
+
+        ImageView fond = new ImageView(this);
+        fond.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        fond.setBackgroundResource(super.getResources().getIdentifier(anime.image(),"drawable",packageName));
+        fond.setAlpha(0.4f);
+
+        ScrollView haut = new ScrollView(this);
+        haut.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        hautmissions = new LinearLayout(this);
+        hautmissions.setOrientation(LinearLayout.VERTICAL);
+        hautmissions.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        hautmissions.setPadding(50,50,50,0);
+
+        LinearLayout persos = new LinearLayout(this);
+        persos.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,160));
+        //persos.setBackgroundResource(R.drawable.fullbg2);
+        persos.setOrientation(LinearLayout.HORIZONTAL);
+
+        haut.addView(hautmissions);
+
+        hautimg.addView(fond);
+        hautimg.addView(haut);
+
+        missions.addView(hautimg);
+        missions.addView(persos);
+
+        refreshMissions();
+    }
+
+    private void refreshMissions()
+    {
+        hautmissions.removeAllViews();
+        Cursor cursor = db.selectAllMissions(""+anime.id(),""+partie.id());
 
         while (cursor.moveToNext())
         {
-            Mission m = new Mission(this);
-            missions.addView(m.layout());
+            BDDMission mission = new BDDMission(cursor);
+            Mission m = new Mission(this,this,mission);
+            hautmissions.addView(m.layout());
         }
         cursor.close();
-
-
     }
 
     private void addLayout(ArrayList<LinearLayout> layouts)
@@ -193,9 +227,20 @@ public class Partie extends Master
     {
         personnages = new LinearLayout(this);
         personnages.setOrientation(LinearLayout.VERTICAL);
-        personnages.setBackground(ContextCompat.getDrawable(this,R.drawable.testbg));
-        personnages.setPadding(16,20,16,0);
         personnages.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
+
+        persos = new FrameLayout(this);
+        persos.setBackgroundColor(Color.parseColor("#505050"));
+        persos.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
+        persos.setPadding(16,20,16,0);
+
+        ImageView fondx = new ImageView(this);
+        fondx.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        fondx.setBackgroundResource(super.getResources().getIdentifier(anime.image(),"drawable",packageName));
+        fondx.setAlpha(0.4f);
+
+        ScrollView haut = new ScrollView(this);
+        haut.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         ArrayList<LinearLayout> layouts = new ArrayList<LinearLayout>();
         addLayout(layouts);
@@ -207,7 +252,7 @@ public class Partie extends Master
 
             FrameLayout fond = new FrameLayout(this);
             ImageView img = new ImageView(this);
-            fond.setBackground(ContextCompat.getDrawable(this,R.drawable.fullbg2));
+            fond.setBackground(ContextCompat.getDrawable(this,R.drawable.bdd_a_ninjas));
             img.setImageResource(super.getResources().getIdentifier(personnage.image(),"drawable",packageName));
             if(!personnage.got())img.setColorFilter(Color.parseColor("#000000"));
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(200,200);
@@ -223,6 +268,11 @@ public class Partie extends Master
         }
         cursor.close();
         for(LinearLayout layout:layouts)personnages.addView(layout);
+
+        haut.addView(personnages);
+
+        persos.addView(fondx);
+        persos.addView(haut);
     }
 
     private void createStats()
@@ -237,5 +287,14 @@ public class Partie extends Master
         text.setGravity(Gravity.CENTER);
         text.setText("Stats");
         stats.addView(text);
+    }
+
+    public void finishMission(BDDMission mission)
+    {
+        db.finishMission(mission,rmonde,rpays,rpartie);
+        refreshMissions();
+        ArrayList<BDDDialogue> dialogues = db.selectAllDialogues(""+partie.animeid(),""+partie.id());
+        dialogue.reinit(dialogues);
+        refreshbarres(anime.id(),partie.id());
     }
 }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends Master
@@ -25,6 +26,7 @@ public class MainActivity extends Master
     {
         super.onCreate(savedInstanceState);
         addViews();
+        //addForeground();
         verifStart();
     }
 
@@ -34,6 +36,7 @@ public class MainActivity extends Master
         centerlayout.setOrientation(LinearLayout.VERTICAL);
         centerlayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
         mainlayout.addView(addHeader());
+        mainlayout.addView(addReputs(-1,-1));
         addBot();
         mainlayout.addView(addFooter(true));
         background.addView(mainlayout);
@@ -41,14 +44,9 @@ public class MainActivity extends Master
 
     public void verifStart()
     {
-        if(!compte.started())
-        {
-            Resources resources = getResources();
-            String[] persos     = resources.getStringArray(R.array.intro_persos0);
-            String[] dialogues  = resources.getStringArray(R.array.intro_dialogues0);
-            Dialogue textes = new Dialogue(this, db, persos,dialogues);
-            background.addView(textes.getView());
-        }
+        ArrayList<BDDDialogue> dialogues = db.selectAllDialogues(""+-1,""+-1);
+        Dialogue textes = new Dialogue(this, db, dialogues,this);
+        background.addView(textes.getView());
     }
 
     private void addBot()
@@ -60,8 +58,7 @@ public class MainActivity extends Master
 
             FrameLayout layout = new FrameLayout(this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1);
-            layout.setPadding(50,50,50,50);
-            //lp.setMargins(0,0,0,60);
+            //layout.setPadding(50,50,50,50);
             layout.setLayoutParams(lp);
             layout.setBackground(ContextCompat.getDrawable(this,R.drawable.testbg));
             layout.setTag(""+anime.id());
@@ -79,11 +76,27 @@ public class MainActivity extends Master
                 }
             });
 
+            FrameLayout fond = new FrameLayout(this);
+            fond.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
+
             ImageView image = new ImageView(this);
             image.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
             image.setImageResource(super.getResources().getIdentifier(anime.image(),"drawable",packageName));
+            image.setScaleType(ImageView.ScaleType.FIT_XY);
 
-            layout.addView(image);
+            TextView image2 = new TextView(this);
+            image2.setText(anime.nom());
+            image2.setTextColor(Color.parseColor("#ffffff"));
+            image2.setTypeface(image2.getTypeface(),Typeface.BOLD_ITALIC);
+            image2.getPaint().setShader(shader);
+            image2.setTextSize(20);
+            image2.setGravity(Gravity.BOTTOM);
+            image2.setPadding(50,0,0,50);
+
+            fond.addView(image);
+            fond.addView(image2);
+
+            layout.addView(fond);
 
             if(!anime.isup())
             {

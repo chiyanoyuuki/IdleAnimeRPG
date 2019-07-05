@@ -1,11 +1,18 @@
 package com.chiya.idleanimerpg;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,42 +22,47 @@ import java.util.ArrayList;
 
 public class Dialogue
 {
+    private String pseudo;
     private FrameLayout derriere;
     private TextView texte;
     private ImageView image, bulle, image0;
     private Context context;
     private BDD db;
-    private ArrayList<String> personnages;
+    private ArrayList<BDDDialogue> dialogues;
+    private BDDDialogue dialogue;
+    private Master master;
+    private int visible;
 
-    private String[] dialogues;
-    private String[] dialogue;
-    int idx;
-
-    public Dialogue(Context context, BDD db, String[] persos, String[] dialogues)
+    public Dialogue(Context context, BDD db, ArrayList<BDDDialogue> dialogues, Master master)
     {
-        this.db = db;
+        this.master = master;
         this.context = context;
-        this.personnages = new ArrayList<String>();
-        initPersonnages(persos);
+        this.db = db;
+        derriere                = new FrameLayout(context);
         initLayout();
-        this.dialogues = dialogues;
-        this.dialogue = dialogues[0].split("/");
-        idx = 0;
-        refresh();
+        if(dialogues.size()>0) {
+            this.dialogues = dialogues;
+            this.dialogue = dialogues.get(0);
+            refresh();
+        }
+        else
+        {
+            derriere.setVisibility(View.INVISIBLE);
+        }
     }
 
-    private void initPersonnages(String[] persos)
+    public void reinit(ArrayList<BDDDialogue> dialogues)
     {
-        for(String perso:persos)
-        {
-            String[] tmp = perso.split("/");
-            personnages.add(db.selectPersonnage(tmp[0],tmp[1],tmp[2]).image());
+        if(dialogues.size()>0) {
+            derriere.setVisibility(View.VISIBLE);
+            this.dialogues = dialogues;
+            this.dialogue = dialogues.get(0);
+            refresh();
         }
     }
 
     private void initLayout()
     {
-        derriere                = new FrameLayout(context);
         ImageView img           = new ImageView(context);
         LinearLayout all        = new LinearLayout(context);
         FrameLayout haut        = new FrameLayout(context);
@@ -72,13 +84,11 @@ public class Dialogue
         image.setLayoutParams   (new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,1));
 
         haut.setPadding(0,270,0,0);
-        bulle.setImageResource(R.drawable.bulle);
 
         img.setBackgroundColor(Color.parseColor("#505050"));
         img.setAlpha(0.9f);
 
         texte.setPadding(150,0,150,80);
-        texte.setTypeface(texte.getTypeface(), Typeface.BOLD);
         texte.setGravity(Gravity.CENTER);
         texte.setTextSize(15);
 
@@ -106,29 +116,130 @@ public class Dialogue
 
     private void refresh()
     {
-        int orientation = Integer.parseInt(dialogue[0]);
-        String perso = personnages.get(Integer.parseInt(dialogue[1]));
-        texte.setText(dialogue[2]);
-        int scaleX = 1;
-        int scaleY = 1;
-        if(dialogue.length>3)scaleX = Integer.parseInt(dialogue[3]);
-        if(dialogue.length>4)scaleY = Integer.parseInt(dialogue[4]);
+        String s = dialogue.texte();
+        while(s.matches("^\\{[^\\}]+\\}.*"))
+        {
+            Conditions c = new Conditions(s, db);
+            if(c.isok())
+            {
+                s = s.substring(s.indexOf("}")+1);
+            }
+            else
+            {
+                passText();
+                if(dialogues.indexOf(dialogue)!=dialogues.size()-1)s = dialogue.texte();
+                else {db.readDialogue(""+dialogue.id());derriere.setVisibility(View.INVISIBLE);return;}
+            }
+        }
+        bulle.setImageResource(R.drawable.bulle);
+        texte.setTextColor(Color.parseColor("#505050"));
+        texte.setTypeface(texte.getTypeface(), Typeface.BOLD);
+        s = s.replaceAll("#pseudo",db.selectCompte().pseudo());
+        visible = -1;
+        if(s.matches("^\\([01]\\):.*"))
+        {
+            visible = Integer.parseInt(s.substring(1,2));
+            s = s.substring(4);
+        }
+
+        long orientation = dialogue.orientation();
+        String perso = dialogue.image();
+        texte.setText(s);
+        long scaleX = dialogue.scalex();
+        long scaleY = dialogue.scaley();
        if(orientation==0)
        {
            image0.setImageResource(context.getResources().getIdentifier(perso,"drawable",context.getPackageName()));
            image0.setScaleX(-1*scaleX);
-           image0.setScaleY(scaleX);
+           image0.setScaleY(scaleY);
            bulle.setScaleX(-1);
            image.setImageResource(0);
+       }
+       else if(orientation==-100)
+       {
+           setpseudo();
+       }
+       else if(orientation==-1)
+       {
+           bulle.setImageResource(0);
+           image.setImageResource(0);
+           image0.setImageResource(0);
+           texte.setTextColor(Color.parseColor("#ffffff"));
+           texte.setTypeface(texte.getTypeface(), Typeface.BOLD_ITALIC);
        }
        else
        {
            image.setImageResource(context.getResources().getIdentifier(perso,"drawable",context.getPackageName()));
            image.setScaleX(scaleX);
            image.setScaleY(scaleY);
-           image0.setScaleX(1);
+           bulle.setScaleX(1);
            image0.setImageResource(0);
        }
+
+       if(visible!=-1)
+       {
+           image0.setColorFilter(Color.parseColor("#000000"));
+           image.setColorFilter(Color.parseColor("#000000"));
+       }
+       else
+       {
+           image0.clearColorFilter();
+           image.clearColorFilter();
+       }
+    }
+
+    private void setpseudo()
+    {
+        bulle.setImageResource(0);
+        image.setImageResource(0);
+        image0.setImageResource(0);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(R.drawable.icone_reputmonde);
+        builder.setTitle("Pseudo :");
+        builder.setMessage("Veuillez rentrer votre pseudo");
+
+        final EditText input = new EditText(context);
+        input.setText("Nouveau joueur");
+        input.setPadding(50,0,0,0);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i){
+                pseudo = input.getText().toString();
+                db.changepseudo(pseudo);
+                master.refreshAcc();
+                changeText();
+            }
+        });
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+        input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,int arg3) {}
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+            @Override
+            public void afterTextChanged(Editable Token)
+            {
+                if(!Token.toString().matches("[0-9a-zA-Z -]{3,20}"))
+                {
+                    input.setBackgroundColor(Color.parseColor("#ffaaaa"));
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                }
+                else
+                {
+                    input.setBackgroundColor(Color.parseColor("#dddddd"));
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+            }
+        });
     }
 
     public FrameLayout getView()
@@ -138,13 +249,37 @@ public class Dialogue
 
     private void changeText()
     {
-        idx++;
-        if(idx<dialogues.length)
+        if(visible==1)
         {
-            dialogue = dialogues[idx].split("/");
+            //CODER POUR VOIR PERSO
+        }
+        int ind = dialogues.indexOf(dialogue);
+
+        if(ind+1<dialogues.size())
+        {
+            BDDDialogue tmp = dialogues.get(ind+1);
+            if(tmp.id()!=dialogue.id())db.readDialogue(""+dialogue.id());
+            dialogue = tmp;
             refresh();
         }
         else {
+            db.readDialogue(""+dialogue.id());
+            derriere.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void passText()
+    {
+        int ind = dialogues.indexOf(dialogue);
+
+        if(ind+1<dialogues.size())
+        {
+            BDDDialogue tmp = dialogues.get(ind+1);
+            if(tmp.id()!=dialogue.id())db.readDialogue(""+dialogue.id());
+            dialogue = tmp;
+        }
+        else {
+            db.readDialogue(""+dialogue.id());
             derriere.setVisibility(View.INVISIBLE);
         }
     }
