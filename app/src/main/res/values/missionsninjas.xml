@@ -2,26 +2,13 @@
 <resources>
 
    <string-array name="missions_0_0">
-        <item>"(-1,-1,0)/Un document secret/10/icone_document/10/10/10"</item>
-        <item>"(-1,-1,1)/Entraînement collectif/60/icone_document/10/20/50"</item>
-        <item>"(-1,-1,1)/Soutien aux habitants/240/icone_document/20/50/200"</item>
-        <item>"(-1,-1,1)/Mission de rang E/300/icone_document/50/80/200"</item>
+       <item>"(-1,-1,0)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
+       <item>"(-1,-1,1)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
+       <item>"(-1,-1,1)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
    </string-array>
 
     <string-array name="missions_0_1">
-        <item>"(-1,-1,0)/Prouver sa valeur/10/icone_document/10/10/10"</item>
-    </string-array>
-
-    <string-array name="missions_0_2">
-        <item>"(-1,-1,0)/Capturer l'attention/10/icone_document/10/10/10"</item>
-    </string-array>
-
-    <string-array name="missions_0_3">
-        <item>"(-1,-1,0)/Prouver sa valeur/10/icone_document/10/10/10"</item>
-    </string-array>
-
-    <string-array name="missions_0_4">
-        <item>"(-1,-1,0)/Inscription au registre/10/icone_document/10/10/10"</item>
+        <item>"(-1,-1,0)/Défier la recrue/1/icone_document/10/10/10"</item>
     </string-array>
 
 </resources>

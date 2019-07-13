@@ -9,7 +9,8 @@ public class BDDPersonnage
     private long animeid;
     private long partieid;
     private String image;
-    private long got;
+    private long niveau;
+    private boolean viewable;
 
     public BDDPersonnage(Cursor c)
     {
@@ -18,7 +19,8 @@ public class BDDPersonnage
         animeid = c.getLong(2);
         partieid= c.getLong(3);
         image   = c.getString(4);
-        got     = c.getLong(5);
+        niveau  = c.getLong(5);
+        viewable = c.getLong(6)==1;
     }
 
     public long id()        {return id;}
@@ -26,5 +28,6 @@ public class BDDPersonnage
     public long animeid()   {return animeid;}
     public long partieid()  {return partieid;}
     public String image()   {return image;}
-    public boolean got()    {return got>0;}
+    public long niveau()    {return niveau;}
+    public boolean viewable(){return viewable;}
 }

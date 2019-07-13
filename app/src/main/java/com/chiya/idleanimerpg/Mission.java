@@ -1,12 +1,7 @@
 package com.chiya.idleanimerpg;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -16,12 +11,16 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-public class Mission
+public class Mission extends NewFrameLayout
 {
+    private BDDAnime anime;
+    private BDDPartie partie;
     private long time;
     private ImageView barreprogress, barre2;
     private TextView barre, start;
     private long startTime;
+    private LinearLayout mission;
+    private BDDMission bddmission;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
 
@@ -36,8 +35,6 @@ public class Mission
             int seconds = 0;
             int minutes = 0;
             int heures = 0;
-            seconds = seconds % 60;
-            minutes = minutes % 60;
             if(millis<0)
             {
                 handler.removeCallbacks(runnable);
@@ -53,22 +50,18 @@ public class Mission
                 seconds = seconds % 60;
                 minutes = minutes % 60;
             }
-
-
             barre.setText(String.format("%02d:%02d:%02d", heures, minutes, seconds));
             handler.postDelayed(this, 500);
         }
     };
-    private Partie partie;
-    private LinearLayout mission;
-    private Context context;
-    private BDDMission bddmission;
-    private FrameLayout background;
 
-    public Mission(Partie partie, Context context, BDDMission bddmission)
+    public Mission(Context context, BDDMission bddmission, Master master, BDDAnime anime, BDDPartie partie)
     {
+        super(master);
+        this.anime = anime;
         this.partie = partie;
         this.bddmission = bddmission;
+        this.master = master;
         time = bddmission.temps();
         this.context = context;
         init();
@@ -76,127 +69,51 @@ public class Mission
 
     private void init()
     {
-        background = new FrameLayout(context);
+        Constructor c = new Constructor(master);
+
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,250);
         lp.setMargins(0,0,0,20);
-        background.setLayoutParams(lp);
+        this.setLayoutParams(lp);
 
-        ImageView fondmission = new ImageView(context);
-        fondmission.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        fondmission.setBackground(ContextCompat.getDrawable(context,R.drawable.fullbg2));
-        fondmission.setAlpha(0.7f);
+        mission                 = c.mission();
+        barre2                  = c.barre2();
+        barreprogress           = c.barreprogress();
+        start                   = c.start();
+        barre                   = c.barre(bddmission.temps());
+        ImageView fondmission   = c.fondMission();
+        FrameLayout progression = c.progression();
+        LinearLayout apercuhaut = c.apercuhaut();
+        LinearLayout nomreput   = c.nomreput();
+        LinearLayout reputs     = c.reputs();
+        LinearLayout apercubas  = c.apercubas();
+        LinearLayout linear     = c.linear();
+        ImageView fleche        = c.fleche();
+        ImageView reputmonde    = c.reput(R.drawable.icone_reputmonde);
+        ImageView reputpays     = c.reput(R.drawable.icone_reputpays);
+        ImageView reputpartie;
+        if(partie.id()==0) reputpartie = c.reput(R.drawable.icone_reputgentil);
+        else reputpartie = c.reput(R.drawable.icone_reputmechant);
+        TextView nbmonde        = c.nombre("+"+bddmission.rmonde());
+        TextView nbpays         = c.nombre("+"+bddmission.rpays());
+        TextView nbpartie       = c.nombre("+"+bddmission.rpartie());
+        ImageView icone         = c.icone();
+        ImageView tmp           = c.tmp();
+        TextView nommission     = c.nommission(bddmission.nom());
 
-        mission = new LinearLayout(context);
-        mission.setPadding(50,20,30,20);
-        mission.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mission.setOrientation(LinearLayout.VERTICAL);
+        addClickStart();
 
-        FrameLayout progression = new FrameLayout(context);
-        LinearLayout apercuhaut = new LinearLayout(context);
-        LinearLayout nomreput   = new LinearLayout(context);
-        LinearLayout reputs     = new LinearLayout(context);
-        LinearLayout apercubas  = new LinearLayout(context);
-        LinearLayout linear     = new LinearLayout(context);
-        ImageView fleche        = new ImageView(context);
-        ImageView reputmonde    = new ImageView(context);
-        ImageView reputpays     = new ImageView(context);
-        ImageView reputpartie   = new ImageView(context);
-        ImageView icone         = new ImageView(context);
-        ImageView tmp           = new ImageView(context);
-        barre2                  = new ImageView(context);
-        barreprogress           = new ImageView(context);
-        TextView nommission     = new TextView(context);
-        start                   = new TextView(context);
-        barre                   = new TextView(context);
-        TextView nbmonde        = new TextView(context);
-        TextView nbpays         = new TextView(context);
-        TextView nbpartie       = new TextView(context);
+        reputs.addView(reputpartie);reputs.addView(nbpartie);reputs.addView(reputpays);reputs.addView(nbpays);reputs.addView(reputmonde);reputs.addView(nbmonde);
+        nomreput.addView(nommission);nomreput.addView(reputs);
+        linear.addView(barreprogress);linear.addView(barre2);
+        progression.addView(tmp);progression.addView(linear);progression.addView(barre);
+        apercuhaut.addView(icone);apercuhaut.addView(nomreput);apercuhaut.addView(fleche);
+        apercubas.addView(progression);apercubas.addView(start);
+        mission.addView(apercuhaut);mission.addView(apercubas);
+        this.addView(fondmission);this.addView(mission);
+    }
 
-        apercuhaut.setLayoutParams      (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,1));
-        nomreput.setLayoutParams        (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,1));
-        nommission.setLayoutParams      (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,5));
-        reputs.setLayoutParams          (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,4));
-        apercubas.setLayoutParams       (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,1));
-        tmp.setLayoutParams             (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 60));
-        linear.setLayoutParams          (new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 60));
-        barreprogress.setLayoutParams   (new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,0));
-        barre2.setLayoutParams          (new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,100));
-        progression.setLayoutParams     (new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,3));
-        nomreput.setLayoutParams        (new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,1));
-        icone.setLayoutParams           (new LinearLayout.LayoutParams(100,100));
-        reputmonde.setLayoutParams      (new LinearLayout.LayoutParams(50,50));
-        reputpays.setLayoutParams       (new LinearLayout.LayoutParams(50,50));
-        reputpartie.setLayoutParams     (new LinearLayout.LayoutParams(50,50));
-        fleche.setLayoutParams          (new LinearLayout.LayoutParams(70,70));
-        start.setLayoutParams           (new LinearLayout.LayoutParams(0,120,1));
-        nbmonde.setLayoutParams         (new LinearLayout.LayoutParams(150,50));
-        nbpays.setLayoutParams          (new LinearLayout.LayoutParams(150,50));
-        nbpartie.setLayoutParams        (new LinearLayout.LayoutParams(150,50));
-
-
-        apercuhaut.setOrientation(LinearLayout.HORIZONTAL);
-        nomreput.setOrientation(LinearLayout.VERTICAL);
-        reputs.setOrientation(LinearLayout.HORIZONTAL);
-        apercubas.setOrientation(LinearLayout.HORIZONTAL);
-        linear.setOrientation(LinearLayout.HORIZONTAL);
-
-        fleche.setImageResource(R.drawable.icone_fleche);
-        reputmonde.setImageResource(R.drawable.icone_reputmonde);
-        reputpays.setImageResource(R.drawable.icone_reputpays);
-        reputpartie.setImageResource(R.drawable.icone_reputpartie);
-        icone.setImageResource(R.drawable.icone_document);
-
-        icone.setBackground(ContextCompat.getDrawable(context,R.drawable.testbg));
-        tmp.setBackground(ContextCompat.getDrawable(context,R.drawable.testbg));
-        start.setBackground(ContextCompat.getDrawable(context,R.drawable.bouton2));
-
-        fleche.setScaleType(ImageView.ScaleType.FIT_XY);
-
-        progression.setPadding  (0,30,20,0);
-        barre.setPadding        (0,0,0,20);
-        nommission.setPadding   (20,0,0,0);
-        start.setPadding        (0,0,0,10);
-
-        long time = bddmission.temps();
-
-        int seconds = (int) (time / 1000);
-        int minutes = seconds / 60;
-        int heures = minutes / 60;
-        seconds = seconds % 60;
-        minutes = minutes % 60;
-
-        barre.setText       (String.format("%02d:%02d:%02d", heures, minutes, seconds));
-        nommission.setText  (bddmission.nom());
-        start.setText       ("Lancer");
-        nbpartie.setText    ("+"+bddmission.rpartie());
-        nbpays.setText      ("+"+bddmission.rpays());
-        nbmonde.setText     ("+"+bddmission.rmonde());
-
-        nommission.setTextColor(Color.parseColor("#ffffff"));
-        barre.setTextColor(Color.parseColor     ("#ffffff"));
-        start.setTextColor(Color.parseColor     ("#ffffff"));
-        nbpartie.setTextColor(Color.parseColor  ("#ffffff"));
-        nbpays.setTextColor(Color.parseColor    ("#ffffff"));
-        nbmonde.setTextColor(Color.parseColor   ("#ffffff"));
-
-        nbpartie.setTextSize(12);
-        nbpays.setTextSize(12);
-        nbmonde.setTextSize(12);
-
-        nommission.setTypeface(nommission.getTypeface(), Typeface.BOLD);
-        barre.setTypeface(barre.getTypeface(), Typeface.BOLD);
-        start.setTypeface(start.getTypeface(), Typeface.BOLD);
-
-        barre.setGravity(Gravity.CENTER);
-        start.setGravity(Gravity.CENTER);
-        reputs.setGravity(Gravity.CENTER);
-
-        barre.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        start.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-
-        barreprogress.setScaleType(ImageView.ScaleType.FIT_XY);
-
-        start.setFocusable(true);
+    private void addClickStart()
+    {
         start.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -220,41 +137,9 @@ public class Mission
                 }
                 else if(tmp.getText().equals("Finir"))
                 {
-                    partie.finishMission(bddmission);
-
+                    master.finishMission(bddmission,anime.id(),partie.id());
                 }
             }
         });
-
-        reputs.addView(reputpartie);
-        reputs.addView(nbpartie);
-        reputs.addView(reputpays);
-        reputs.addView(nbpays);
-        reputs.addView(reputmonde);
-        reputs.addView(nbmonde);
-
-        nomreput.addView(nommission);
-        nomreput.addView(reputs);
-        linear.addView(barreprogress);
-        linear.addView(barre2);
-
-        progression.addView(tmp);
-        progression.addView(linear);
-        progression.addView(barre);
-
-        apercuhaut.addView(icone);
-        apercuhaut.addView(nomreput);
-        apercuhaut.addView(fleche);
-
-        apercubas.addView(progression);
-        apercubas.addView(start);
-
-        mission.addView(apercuhaut);
-        mission.addView(apercubas);
-
-        background.addView(fondmission);
-        background.addView(mission);
     }
-
-    public FrameLayout layout(){return background;}
 }

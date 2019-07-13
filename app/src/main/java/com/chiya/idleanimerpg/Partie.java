@@ -1,6 +1,6 @@
 package com.chiya.idleanimerpg;
 
-import android.content.res.Resources;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,18 +20,23 @@ import java.util.ArrayList;
 
 public class Partie extends Master
 {
+    private FrameLayoutMuraillePersos muraille;
+
     private BDDAnime anime;
     private BDDPartie partie;
-    private FrameLayout top;
+    private FrameLayout top, hautimg;
     private LinearLayout missions, personnages, stats, centerlayout, hautmissions;
     private TextView btn01, btn02, btn03;
     private int state;
     private FrameLayout persos;
+    private ArrayList<ImageView> persosmuraille, listepersonnages;
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        listepersonnages = new ArrayList<>();
+        persosmuraille = new ArrayList<>();
         String animeid = getIntent().getStringExtra("animeid");
         String partieid = getIntent().getStringExtra("partieid");
         anime = db.selectAnime(animeid);
@@ -53,6 +60,7 @@ public class Partie extends Master
         mainlayout.addView(centerlayout);
         mainlayout.addView(addFooter(false));
         background.addView(mainlayout);
+        refreshbarres(anime.id(),partie.id());
     }
 
     public void verifStart()
@@ -74,7 +82,25 @@ public class Partie extends Master
         topimage.setImageResource(super.getResources().getIdentifier(partie.image(),"drawable",packageName));
         topimage.setScaleType(ImageView.ScaleType.FIT_XY);
 
+        ImageView tmp = new ImageView(this);
+        tmp.setImageResource(R.drawable.retour);
+        FrameLayout.LayoutParams fp = new FrameLayout.LayoutParams(150,150);
+        //fp.gravity = Gravity.
+        tmp.setLayoutParams(fp);
+        tmp.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(Partie.this, Anime.class);
+                intent.putExtra("animeid",""+partie.animeid());
+                closeDb();
+                startActivity(intent);
+            }
+        });
+
         top.addView(topimage);
+        top.addView(tmp);
         centerlayout.addView(top);
     }
 
@@ -86,7 +112,7 @@ public class Partie extends Master
             else if(state==1)   {centerlayout.removeView(persos);       btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));}
             else if(state==2)   {centerlayout.removeView(stats);        btn03.setBackground(ContextCompat.getDrawable(this,R.drawable.bouton));}
 
-            if(i==0)            {centerlayout.addView(missions);        btn01.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
+            if(i==0)            {centerlayout.addView(missions);        btn01.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));refreshMuraille();}
             else if(i==1)       {centerlayout.addView(persos);          btn02.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
             else if(i==2)       {centerlayout.addView(stats);           btn03.setBackground(ContextCompat.getDrawable(this,R.drawable.clicked));}
 
@@ -162,40 +188,29 @@ public class Partie extends Master
     private void createMissions()
     {
         missions = new LinearLayout(this);
-        missions.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
-        missions.setOrientation(LinearLayout.VERTICAL);
+        missions.addView(new FrameLayoutMissions(this,anime,partie));
+    }
 
-        FrameLayout hautimg = new FrameLayout(this);
-        hautimg.setBackgroundColor(Color.parseColor("#505050"));
-        hautimg.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
+    private TextView ssmenu(String menu)
+    {
+        TextView tmp = new TextView(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(230, ViewGroup.LayoutParams.MATCH_PARENT);
+        lp.setMargins(0,0,50,0);
+        tmp.setLayoutParams(lp);
+        tmp.setText(menu);
+        tmp.setPadding(0,30,0,0);
+        tmp.setBackgroundResource(R.drawable.drapeau);
+        if(menu.equals("Histoire")) tmp.setBackgroundResource(R.drawable.drapeauclicked);
+        tmp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        tmp.setTextColor(Color.parseColor("#ffffff"));
+        tmp.setTextSize(9);
+        tmp.setTypeface(tmp.getTypeface(),Typeface.BOLD);
+        return tmp;
+    }
 
-        ImageView fond = new ImageView(this);
-        fond.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        fond.setBackgroundResource(super.getResources().getIdentifier(anime.image(),"drawable",packageName));
-        fond.setAlpha(0.4f);
-
-        ScrollView haut = new ScrollView(this);
-        haut.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        hautmissions = new LinearLayout(this);
-        hautmissions.setOrientation(LinearLayout.VERTICAL);
-        hautmissions.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        hautmissions.setPadding(50,50,50,0);
-
-        LinearLayout persos = new LinearLayout(this);
-        persos.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,160));
-        //persos.setBackgroundResource(R.drawable.fullbg2);
-        persos.setOrientation(LinearLayout.HORIZONTAL);
-
-        haut.addView(hautmissions);
-
-        hautimg.addView(fond);
-        hautimg.addView(haut);
-
-        missions.addView(hautimg);
-        missions.addView(persos);
-
-        refreshMissions();
+    public void refreshMuraille()
+    {
+        muraille.refreshPersos();
     }
 
     private void refreshMissions()
@@ -232,7 +247,7 @@ public class Partie extends Master
         persos = new FrameLayout(this);
         persos.setBackgroundColor(Color.parseColor("#505050"));
         persos.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0,1));
-        persos.setPadding(16,20,16,0);
+        //persos.setPadding(16,20,16,0);
 
         ImageView fondx = new ImageView(this);
         fondx.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -252,17 +267,18 @@ public class Partie extends Master
 
             FrameLayout fond = new FrameLayout(this);
             ImageView img = new ImageView(this);
-            fond.setBackground(ContextCompat.getDrawable(this,R.drawable.bdd_a_ninjas));
+            fond.setBackgroundResource(super.getResources().getIdentifier("lvl_"+personnage.niveau(),"drawable",packageName));
             img.setImageResource(super.getResources().getIdentifier(personnage.image(),"drawable",packageName));
-            if(!personnage.got())img.setColorFilter(Color.parseColor("#000000"));
+            if(!personnage.viewable())img.setColorFilter(Color.parseColor("#000000"));
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(200,200);
             lp.setMargins(20,20,20,20);
             fond.setLayoutParams(lp);
-            img.setLayoutParams(new LinearLayout.LayoutParams(350,350));
-            img.setScaleType(ImageView.ScaleType.FIT_START);
+            img.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            img.setPadding(500,0,500,0);
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             fond.addView(img);
+            listepersonnages.add(img);
             layouts.get(layouts.size()-1).addView(fond);
-
             cpt++;
             if(cpt%4==0)addLayout(layouts);
         }
@@ -291,10 +307,56 @@ public class Partie extends Master
 
     public void finishMission(BDDMission mission)
     {
+        recompense();
         db.finishMission(mission,rmonde,rpays,rpartie);
         refreshMissions();
         ArrayList<BDDDialogue> dialogues = db.selectAllDialogues(""+partie.animeid(),""+partie.id());
         dialogue.reinit(dialogues);
         refreshbarres(anime.id(),partie.id());
     }
+
+    private void recompense()
+    {
+        int h = 20;
+        String image = "icone_reputpartie";
+        for(int i=0;i<100;i++)
+        {
+            if(i==59){image = "icone_reputpays";h=10;}
+            if(i==89){image = "icone_reputmonde";h=0;}
+            final ImageView tmp = new ImageView(this);
+            tmp.setImageResource(super.getResources().getIdentifier(image,"drawable",packageName));
+            tmp.setLayoutParams(new LinearLayout.LayoutParams(40,40));
+            tmp.setX(0+(int)(Math.random()*1000));
+            tmp.setY(600+(int)(Math.random()*800));
+
+            background.addView(tmp);
+            Animation animation = new TranslateAnimation(0,-tmp.getX()-40,0,-tmp.getY()+135+h);
+            animation.setDuration(1500);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    background.removeView(tmp);
+                }
+            });
+            animation.setFillAfter(true);
+            tmp.setAnimation(animation);
+        }
+    }
+
+    public void refreshPersos()
+    {
+        int cpt = 0;
+        Cursor cursor = db.selectAllPersonnages(""+partie.animeid(),""+partie.id());
+        while(cursor.moveToNext())
+        {
+            BDDPersonnage tmp = new BDDPersonnage(cursor);
+            if(tmp.viewable())listepersonnages.get(cpt).clearColorFilter();
+            cpt++;
+        }
+        cursor.close();
+    }*/
 }

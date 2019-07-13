@@ -4,52 +4,105 @@
     <string-array name="Okori">
         <item>"Okori"</item>
         <item>"1"</item>
+        <item>"okori"</item>
+        <item>0</item>
     </string-array>
 
     <string-array name="Hokage">
         <item>"Taikasei"</item>
         <item>"1"</item>
-    </string-array>
-    <string-array name="Raikage">
-        <item>"Raikage"</item>
-        <item>"1"</item>
-    </string-array>
-    <string-array name="Mizukage">
-        <item>"Mizukage"</item>
-        <item>"1"</item>
-    </string-array>
-    <string-array name="Tsuchikage">
-        <item>"Tsuchikage"</item>
-        <item>"1"</item>
+        <item>"hokage"</item>
+        <item>5</item>
     </string-array>
     <string-array name="Kazekage">
-        <item>"Kazekage"</item>
+        <item>"Guren"</item>
         <item>"1"</item>
+        <item>"kazekage"</item>
+        <item>5</item>
     </string-array>
 
-    <string-array name="Kichiro">
-        <item>"Kichiro"</item>
+    <string-array name="Ino">
+        <item>"Kiza"</item>
         <item>"0"</item>
+        <item>"ino"</item>
+        <item>2</item>
     </string-array>
 
-    <string-array name="Kohana">
+    <string-array name="Madara">
+        <item>"Heigeisuru"</item>
+        <item>"1"</item>
+        <item>"madara"</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="Orochimaru">
+        <item>"Uwabami"</item>
+        <item>"0"</item>
+        <item>"orochimaru"</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="Sakura">
         <item>"Kohana"</item>
         <item>"0"</item>
+        <item>"sakura"</item>
+        <item>3</item>
     </string-array>
 
-    <string-array name="Kuro">
+    <string-array name="Naruto">
         <item>"Kuro"</item>
         <item>"0"</item>
+        <item>"naruto"</item>
+        <item>3</item>
     </string-array>
 
-    <string-array name="Reigen">
+    <string-array name="Sasuke">
         <item>"Reigen"</item>
         <item>"0"</item>
+        <item>"sasuke"</item>
+        <item>3</item>
     </string-array>
 
-    <string-array name="Yakishio">
+    <string-array name="Kakashi">
         <item>"Yakishio"</item>
         <item>"0"</item>
+        <item>"kakashi"</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="Zabuza">
+        <item>"Mazuku"</item>
+        <item>"0"</item>
+        <item>"zabuza"</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="Hinata">
+        <item>"Itooshii"</item>
+        <item>"0"</item>
+        <item>"hinata"</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="Shikamaru">
+        <item>"Sakashii"</item>
+        <item>"0"</item>
+        <item>"shikamaru"</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="Pain">
+        <item>"Ute"</item>
+        <item>"1"</item>
+        <item>"pain"</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="Tayuya">
+        <item>"Kashin"</item>
+        <item>"0"</item>
+        <item>"tayuya"</item>
+        <item>2</item>
     </string-array>
 
 </resources>

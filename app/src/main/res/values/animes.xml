@@ -13,16 +13,11 @@
         <item>Pays des ninjas</item>
         <item>bdd_a_ninjas</item>
         <item>1</item>
-        <item>village</item>
-        <item>0</item>
     </string-array>
 
     <array name="parties_0">
-        <item>@array/villagefeu</item>
-        <item>@array/villagebrume</item>
-        <item>@array/villagefoudre</item>
-        <item>@array/villageterre</item>
-        <item>@array/villagevent</item>
+        <item>@array/alliance_ninja</item>
+        <item>@array/ninjas_renegats</item>
     </array>
 
     <!-- END NINJAS -->
@@ -33,14 +28,12 @@
         <item>Pays des heros</item>
         <item>bdd_a_heros</item>
         <item>1</item>
-        <item>école</item>
-        <item>1</item>
     </string-array>
 
 
     <array name="parties_1">
-        <item>@array/ecoletokyo</item>
-        <item>@array/ecolekyoto</item>
+        <item>@array/ecole_heros</item>
+        <item>@array/ecole_vilains</item>
     </array>
 
     <!-- END HEROS -->
@@ -49,8 +42,6 @@
         <item>Pays des titans</item>
         <item>bdd_anime_titans</item>
         <item>0</item>
-        <item>enceinte</item>
-        <item>1</item>
     </string-array>
 
     <array name="parties_2">

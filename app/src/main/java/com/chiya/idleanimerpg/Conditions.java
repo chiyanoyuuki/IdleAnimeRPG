@@ -18,10 +18,9 @@ public class Conditions
 
     public void verifCond(String s)
     {
-        if(s.equals("FIRST_EVER"))    ok = isFirstMissionEver();
+        if(s.equals("FIRST_EVER"))          ok = !db.compte().selectCompte().started();
+        else if(s.startsWith("NOGOT_"))     ok = !db.equipe().gotPerso(s.substring(s.indexOf("_")+1));
     }
-
-    private boolean isFirstMissionEver(){return !db.selectCompte().started();}
 
     public boolean isok()
     {

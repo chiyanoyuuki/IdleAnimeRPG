@@ -9,6 +9,7 @@ public class BDDCompte
     private long persoid;
     private long ressources;
     private boolean started;
+    private long teamsize;
 
     public BDDCompte(Cursor c)
     {
@@ -17,6 +18,7 @@ public class BDDCompte
         persoid     = c.getLong(2);
         ressources  = c.getLong(3);
         started     = c.getLong(4)!=0;
+        teamsize    = c.getLong(5);
     }
 
     public long id()        {return id;}
@@ -24,4 +26,5 @@ public class BDDCompte
     public long persoid()   {return persoid;}
     public long ressources(){return ressources;}
     public boolean started(){return started;}
+    public long teamsize(){return teamsize;}
 }

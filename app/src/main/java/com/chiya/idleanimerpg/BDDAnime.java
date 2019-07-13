@@ -8,8 +8,6 @@ public class BDDAnime
     private String nom;
     private String image;
     private boolean isup;
-    private String partie;
-    private long type;
 
     public BDDAnime(Cursor c)
     {
@@ -17,14 +15,10 @@ public class BDDAnime
         nom     = c.getString(1);
         image   = c.getString(2);
         isup    = c.getLong(3)==1;
-        partie  = c.getString(4);
-        type    = c.getLong(5);
     }
 
     public long id()        {return id;}
     public String nom()     {return nom;}
     public String image()   {return image;}
     public boolean isup()   {return isup;}
-    public String partie()  {return partie;}
-    public long type()      {return type;}
 }

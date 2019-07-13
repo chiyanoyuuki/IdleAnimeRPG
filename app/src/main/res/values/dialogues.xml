@@ -18,24 +18,6 @@
 
     <!---->
 
-    <array name="dialogues_partie_0_0">
-        <item>@array/intro_partie_0_0</item>
-        <item>@array/first_mission_0_0</item>
-    </array>
-    <array name="dialogues_partie_0_1">
-        <item>@array/intro_partie_0_1</item>
-        <item>@array/first_mission_0_1</item>
-    </array>
-    <array name="dialogues_partie_0_2">
-        <item>@array/intro_partie_0_2</item>
-    </array>
-    <array name="dialogues_partie_0_3">
-        <item>@array/intro_partie_0_3</item>
-    </array>
-    <array name="dialogues_partie_0_4">
-        <item>@array/intro_partie_0_4</item>
-    </array>
-
     <array name="dialogues_partie_1_0">
         <item>@array/intro_partie_1_0</item>
     </array>
@@ -46,17 +28,22 @@
     <!-- SPECIAUX -->
 
     <string-array name="dialogue_pseudo">
+        <item>"(-1,-1,1)/0/Okori/{FIRST_EVER}C'est génial, tu peux déjà me considérer comme un membre de ton équipe si tu veux bien de mes services."</item>
         <item>"(-1,-1,1)/0/Okori/{FIRST_EVER}D'ailleurs ça me fait penser, sous quel nom veux-tu apparaître aux yeux de tous ?"</item>
         <item>"(-1,-1,1)/-100/ /{FIRST_EVER} "</item>
-        <item>"(-1,-1,1)/0/Okori/{FIRST_EVER}Super, bientôt dans le monde entier, tout le monde entendra parler de #pseudo ! Allons montrer à tous de quoi nous sommes capables !"</item>
+        <item>"(-1,-1,1)/0/Okori/{FIRST_EVER}[COMPTE_START]Super, bientôt dans le monde entier, tout le monde entendra parler de #pseudo ! Allons montrer à tous de quoi nous sommes capables !"</item>
+    </string-array>
+
+    <string-array name="okori_join">
+        <item>"(-1,-1,0)/-1/ /{NOGOT_Okori}[ADD_TEAMSIZE,ADD_EQUIPE_Okori]@Okori@ rejoint votre équipe, vous pouvez l'envoyer effectuer une mission à la fois."</item>
     </string-array>
 
     <!-- ECRAN 0 -->
 
     <string-array name="intro_0">
-        <item>"(0,-1,-1)/1/Okori/Bienvenue à toi, je m'appelle @Okori@, je suis originaire du village du brouillard. C'est une des 5 grandes parties qui composent le pays des ninjas."</item>
-        <item>"(0,-1,-1)/0/Okori/Notre monde s'est divisé après les guerres, ce qui a formé de vastes pays appartenants chacun à un clan unique.. Comme le clan des ninjas ou celui des héros par exemple."</item>
-        <item>"(0,-1,-1)/0/Okori/Aujourd'hui, certaines personnes cherchent encore à réunir tous les clans en accomplissant des hauts-faits et en grimpant dans l'estime de chaque communauté."</item>
+        <item>"(0,-1,-1)/1/Okori/Bienvenue à toi, je m'appelle @Okori@, je suis originaire du village du brouillard. Un des villages qui compose le pays des ninjas."</item>
+        <item>"(0,-1,-1)/1/Okori/Notre monde s'est divisé après les guerres, ce qui a formé de vastes pays appartenants chacun à un clan unique.. Comme le clan des ninjas ou celui des héros par exemple."</item>
+        <item>"(0,-1,-1)/1/Okori/Aujourd'hui, certaines personnes cherchent encore à réunir tous les clans en accomplissant des hauts-faits et en grimpant dans l'estime de chaque communauté."</item>
         <item>"(0,-1,-1)/1/Okori/Si toi aussi tu veux essayer de sauver ce monde, je suis prête à t'aider et à te guider jusqu'à ce que tu trouves tes propres repères."</item>
         <item>"(0,-1,-1)/1/Okori/Il va falloir que nous réunissions les personnages les plus influentes de chaque pays pour esperer faire changer les choses."</item>
         <item>"(0,-1,-1)/1/Okori/Voyons déjà par quel pays nous allons commencer, choisis notre prochaine destination capitaine !"</item>
@@ -66,101 +53,31 @@
 
     <string-array name="intro_pays_0">
         <item>"(-1,0,-1)/1/Okori/C'est la première fois que tu viens au pays des ninjas, personne n'a encore entendu parler de toi et ça il va falloir changer ça !"</item>
-        <item>"(-1,0,-1)/1/Okori/Ce pays est partagé entre 5 villages qui se disputent les terres et les meilleurs ninjas depuis que le monde s'est divisé."</item>
-        <item>"(-1,0,-1)/1/Okori/Chaque pays est dirigé par un ninja d'exception, il va falloir les convaincre si nous voulons pénetrer dans l'enceinte de leurs villages"</item>
-        <item>"(-1,0,-1)/1/Okori/Essayons déjà d'entrer en contact avec un des chefs de village, ils ne sont pas tous ouverts aux étrangers. Où allons nous capitaine ?"</item>
+        <item>"(-1,0,-1)/1/Okori/Ce pays est partagé entre l'alliance des ninjas qui combat pour la paix et les ninjas renégats qui veulent renverser les grands villages ninjas et s'emparer du pouvoir."</item>
+        <item>"(-1,0,-1)/1/Okori/A toi de voir quel point de vue tu soutiens, même si tu pourrais décider d'être la passerelle de ces deux régimes et aider aussi bien l'alliance que les renégats."</item>
+        <item>"(-1,0,-1)/1/Okori/Tout ce qui importe, c'est que tu puisses t'entourer des meilleurs éléments ninjas pour que le monde reconnaisse ton pouvoir et que tu puisses changer les choses. Où allons nous capitaine ?"</item>
     </string-array>
 
     <string-array name="intro_pays_1">
-        <item>"(-1,0,-1)/1/Okori/Nous sommes dans le pays des héros, il est divisé en plusieurs écoles qui cherchent à recruter et former les meilleurs élèves héros du pays. Tu vas devoir leur montrer qui tu es !"</item>
-        <item>"(-1,0,-1)/1/Okori/D'après ce que j'ai entendu, le pays des héros est assez différent des autres car ce ne sont pas les écoles qui sont en compétition mais chaque individu de ce pays."</item>
-        <item>"(-1,0,-1)/1/Okori/Si tu veux qu'on reconnaisse ta valeur, il va falloir que tu deviennes un des plus grands héros de ce pays en triomphant de tous les autres."</item>
-        <item>"(-1,0,-1)/1/Okori/Nous allons devoir intégrer une école, laquelle te tente le plus ?"</item>
+        <item>"(-1,0,-1)/1/Okori/Nous sommes dans le pays des héros, ici depuis la nuit des temps les héros combattent les vilains qui désirent controler tous les pouvoirs du monde."</item>
+        <item>"(-1,0,-1)/1/Okori/Ici, le pays est partagé entre l'école des héros et l'armée des vilains, à toi de voir où tu décides te rendre et quelle voie tu choisis de suivre. "</item>
+        <item>"(-1,0,-1)/1/Okori/Dans ce pays, la valeur est reconnue par les victoires contre les plus grands héros ou vilains. Je sais que tu arriveras à te démarquer vite des autres."</item>
+        <item>"(-1,0,-1)/1/Okori/Quelle voie choisis tu de suivre ?"</item>
     </string-array>
 
     <!-- ECRAN 2 -->
 
-    <string-array name="intro_partie_0_0">
-        <item>"(-1,-1,0)/1/Hokage/Bienvenue à toi, je suis @Hokage@, troisième chef du village du feu, je suis content de voir de nouveaux visages dans mon village./3/3"</item>
-        <item>"(-1,-1,0)/1/Hokage/Ici nous valorisons le respect de nos compagnons d'arme et des autres habitants du village, tu peux rejoindre mes hommes avec plaisir si tu partages nos idéaux./3/3"</item>
-        <item>"(-1,-1,0)/1/Hokage/Commences tout d'abord par apporter ce document aux services secrets si tu tiens à nous rejoindre, nous verrons ce qu'on pourra te confier par la suite./3/3"</item>
-        <item>"(-1,-1,0)/0/Okori/Super ! Ce dirigeant est très ouvert aux nouveaux venus, allons lui montrer de quoi nous sommes capables et terminons cette mission en un rien de temps !"</item>
-    </string-array>
-
-    <!-- VILLAGE DU FEU -->
-
-    <string-array name="dialogue_first_0_0">
-        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}Vous croisez le chemin d'un ninja en allant faire votre comtpe rendu"</item>
-        <item>"(-1,-1,1)/1/Yakishio/{FIRST_EVER}(1):Bonjour, je suis @Yakishio@, un ninja superieur du village du feu, je suis ravi de voir que de nouvelles personnes veulent aider ce pays."</item>
-        <item>"(-1,-1,1)/1/Yakishio/{FIRST_EVER}J'aimerais rejoindre ton équipe et t'aider dans ta quête. J'espère qu'un jour le pays des ninjas pourra de nouveau vivre en paix avec les autres pays de ce vaste monde."</item>
-        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}@Yakishio@ a désormais rejoint votre équipe. Vous allez faire votre compte rendu au chef du village."</item>
-    </string-array>
-
-    <string-array name="first_mission_0_0">
-        <item>"(-1,-1,1)/0/ /@@dialogue_first_0_0"</item>
-        <item>"(-1,-1,1)/1/Hokage/Je te remercie, je veux bien te considérer comme un apirant du village à partir de maintenant, tu te verras aussi confier d'autres missions à partir de maintenant./3/3"</item>
-        <item>"(-1,-1,1)/1/Hokage/Je vais demander à ce qu'on t'assigne une première mission de rang faible, tu es libre de te balader dans le village comme bon te semble./3/3"</item>
-        <item>"(-1,-1,1)/0/Okori/Génial ! Nous pouvons désormais aller et venir ici sans problème, félicitations ! Il ne nous reste plus qu'à gravir les échelons pour gagner en réputation."</item>
-        <item>"(-1,-1,1)/0/ /@@dialogue_pseudo"</item>
-    </string-array>
-
-    <!-- VILLAGE DE LA BRUME -->
-
-    <string-array name="dialogue_first_0_1">
-        <item>"(-1,-1,1)/1/Yakishio/{FIRST_EVER}(1):Je suis très heureux de voir que tu es motivé à changer les choses dans ce monde, et d'après ce que j'ai vu, tu as sûrement le potentiel pour le faire."</item>
-        <item>"(-1,-1,1)/1/Yakishio/{FIRST_EVER}Je me nomme @Yakishio@, je suis l'instructeur des aspirants ninjas de notre village, tu pourras faire appel à moi si tu as besoin d'aide."</item>
-        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}@Yakishio@ a désormais rejoint votre équipe. Vous allez faire votre compte rendu au chef du village."</item>
-    </string-array>
-
-    <string-array name="intro_partie_0_1">
-        <item>"(-1,-1,0)/1/Okori/Le village de la brume où j'ai grandi..! Je connais le chef du village, je pense qu'il t'accueillera avec plaisir, allons le rencontrer !"</item>
-        <item>"(-1,-1,0)/1/Mizukage/Bienvenue chez moi, si tu connais Okori, je pense que je peux te faire confiance. Malgrès cela, j'aimerai que tu me prouves ta bonne foi."</item>
-        <item>"(-1,-1,0)/1/Mizukage/Si tu veux devenir un aspirant de notre village, commences par prouver à l'instructeur de quoi tu es capable."</item>
-        <item>"(-1,-1,0)/0/Okori/Allons voir l'instructeur, j'ai aussi hâte de voir ce que tu vaux !"</item>
-    </string-array>
-
-    <string-array name="first_mission_0_1">
-        <item>"(-1,-1,1)/0/ /@@dialogue_first_0_1"</item>
-        <item>"(-1,-1,1)/1/Mizukage/Je suis très contente de voir que ton entretien avec notre instructeur s'est bien passé ! Tu peux maintenant te considérer aspirant ninja de la brume."</item>
-        <item>"(-1,-1,1)/1/Mizukage/J'espere que toi et @Okori@ ferez du bon travail ensemble, je vous souhaite bonne chance ! Nous te proposerons des missions régulièrement si tu veux nous aider."</item>
-        <item>"(-1,-1,1)/0/Okori/Je suis contente de voir que tout se passe bien pour toi dans mon village natal, j'ai hâte de voir ce que la suite nous réservera !"</item>
-        <item>"(-1,-1,1)/0/ /@@dialogue_pseudo"</item>
-    </string-array>
-
-    <!-- VILLAGE DE LA FOUDRE -->
-
-    <string-array name="intro_partie_0_2">
-        <item>"(-1,-1,0)/1/Raikage/Aaaaargh ! Si tu crois que nous recrutons n'importe qui dans notre village, tu te trompes lourdement !! Hors de ma vue !!"</item>
-        <item>"(-1,-1,0)/-1/ /Vous vous faites jeter hors du bâtiment"</item>
-        <item>"(-1,-1,0)/0/Okori/Excuses moi, j'aurais du te prévenir que le dirigeant de ce pays avait un caractère bien à lui.. Il faudrait lui prouver ta valeur si tu veux qu'il t'écoute.."</item>
-        <item>"(-1,-1,0)/0/Okori/Il faudrait trouver un moyen de capturer son attention et nous essaierons de lui reparler ensuite !"</item>
-    </string-array>
-
-    <string-array name="intro_partie_0_3">
-        <item>"(-1,-1,0)/1/Tsuchikage/Bienvenue dans mon village, nous sommes le peuple de la terre, je ne laisse rentrer ici que les personnes en qui je peux avoir confiance."</item>
-        <item>"(-1,-1,0)/1/Tsuchikage/Va trouver mon fils, il saura me dire si nous pouvons te donner ta chance. Ne reviens pas avant que cela ne soit fait et qu'il ait donnné son accord."</item>
-        <item>"(-1,-1,0)/0/Okori/Son fils est très connu dans le pays des ninjas, car il maitrise tous les élèments en même temps, c'est impressionnant ! Allons le trouver.."</item>
-    </string-array>
-
-    <string-array name="intro_partie_0_4">
-        <item>"(-1,-1,0)/1/Kazekage/Bienvenue au village du vent, quelque chose me dit que tu es un grand ninja au fond de toi, je veux bien t'accueillir en tant qu'aspirant de mon village."</item>
-        <item>"(-1,-1,0)/1/Kazekage/Je vais suivre ton évolution de près, j'espère que tu seras à la hauteur de mes esperances. Commences par t'inscrire au registre et devient un habitant aux yeux de tous."</item>
-        <item>"(-1,-1,0)/0/Okori/C'était plutôt facile, je ne connaissais pas ce nouveau dirigeant car il est assez jeune, mais en tous cas je l'aime bien !"</item>
-    </string-array>
-
-
-
     <!-- HEROS -->
 
     <string-array name="intro_partie_1_0">
-        <item>"(-1,-1,0)/1/Raton/Bienvenue dans mon école ! Si tu sais te défendre et que tu désires la paix dans le monde, je te formerai avec grand plaisir !"</item>
-        <item>"(-1,-1,0)/1/Raton/Tu peux aller trouver le professeur des recrues, il te donnera un premier cours et jaugera tes capacités."</item>
+        <item>"(-1,-1,0)/1/Hokage/Bienvenue dans mon école ! Si tu sais te défendre et que tu désires la paix dans le monde, je te formerai avec grand plaisir !"</item>
+        <item>"(-1,-1,0)/1/Hokage/Tu peux aller trouver le professeur des recrues, il te donnera un premier cours et jaugera tes capacités."</item>
         <item>"(-1,-1,0)/0/Okori/De tout ce que j'ai pu voir de ce pays pour l'instant, les héros ont l'air d'être des gens chaleureux, ça fait plaisir à voir ! Allons voir ce fameux professeur."</item>
     </string-array>
 
     <string-array name="intro_partie_1_1">
-        <item>"(-1,-1,0)/1/Allmight/Bienvenue à toi !!! Si tu veux devenir le plus grand héros de ce monde, tu frappes à la bonne porte ! Je forme les meilleurs élèves depuis des années !"</item>
-        <item>"(-1,-1,0)/1/Allmight/Montres moi ce dont tu es capable et nous commencerons ton apprentissage !"</item>
+        <item>"(-1,-1,0)/1/Hokage/Bienvenue à toi !!! Si tu veux devenir le plus grand héros de ce monde, tu frappes à la bonne porte ! Je forme les meilleurs élèves depuis des années !"</item>
+        <item>"(-1,-1,0)/1/Hokage/Montres moi ce dont tu es capable et nous commencerons ton apprentissage !"</item>
         <item>"(-1,-1,0)/0/Okori/Il est très énergique celui là, mais j'ai l'impression qu'il est vraiment très puissant aussi, donnes tout ce que tu as !"</item>
     </string-array>
 
