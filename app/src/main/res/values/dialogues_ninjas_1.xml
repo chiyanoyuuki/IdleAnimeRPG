@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="dialogues_partie_0_1">
+        <item>@array/intro_partie_0_1</item>
+        <item>@array/first_mission_0_1</item>
+    </array>
+
+    <string-array name="intro_partie_0_1">
+        <item>"(-1,-1,0)/1/Pain/Bienvenue dans notre repère, je suis @Pain@, grand chef de notre armée de rébellion, si tu veux instaurer un régime de paix par la puissance, nous pouvons te former."</item>
+        <item>"(-1,-1,0)/1/Madara/Tu peux commencer par affronter notre toute dernière recrue, si tu gagnes ce combat, tu prendras sa place dans notre armée, si tu le perds, tu ne seras probablement plus de ce monde."</item>
+        <item>"(-1,-1,0)/1/Pain/Lui c'est @Madara@, mon général en second. Je vais suivre ce combat avec grande attention alors prouve moi que nous avons quelque chose à gagner en te recrutant."</item>
+        <item>"(-1,-1,0)/0/Okori/Montrons leur de quoi on est capable !"</item>
+        <item>"(-1,-1,0)/0/ /@@okori_join"</item>
+    </string-array>
+
+    <string-array name="dialogue_first_0_1">
+        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}Vous dominez le combat et êtes sur le point d'achever votre adversaire lorsqu'un ninja s'interpose entre vous et votre cible."</item>
+        <item>"(-1,-1,1)/1/Zabuza/{FIRST_EVER}(1)Ca suffit ! Le combat était intéressant même pour des débutants, j'aime ton esprit de combativité et ta soif de vaincre, mais on va le laisser en vie."</item>
+        <item>"(-1,-1,1)/1/Zabuza/{FIRST_EVER}[VIEW_Zabuza]Je suis @Zabuza@, un des caporals de notre armée, tu m'intéresse beaucoup, je vais t'aider à t'intégrer avec nous et tu me rendras la pareille plus tard."</item>
+        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}[ADD_TEAMSIZE,ADD_EQUIPE_Zabuza]@Zabuza@ a désormais rejoint votre équipe. Vous retournez voir les généraux de l'armée."</item>
+    </string-array>
+
+    <string-array name="first_mission_0_1">
+        <item>"(-1,-1,1)/0/ /@@dialogue_first_0_1"</item>
+        <item>"(-1,-1,1)/1/Madara/Tu aurais dû achever ton adversaire. J'espère que ce n'est pas un signe de faiblesse de ta part. Quoi qu'il en soit, tu fais maintenant partie de l'armée des renégats ninjas."</item>
+        <item>"(-1,-1,1)/1/Pain/Tu as du potentiel, je pense que tu iras loin dans notre armée, tu es le bienvenue, nous avons besoin de talents latents comme les tiens."</item>
+        <item>"(-1,-1,1)/1/Pain/Evolue au sein de notre armée et tu te verras confier des hommes et des biens. Montres moi que tu es digne de porter un nom de ninja renégat de la rébellion."</item>
+        <item>"(-1,-1,1)/0/ /@@dialogue_pseudo"</item>
+    </string-array>
+</resources>

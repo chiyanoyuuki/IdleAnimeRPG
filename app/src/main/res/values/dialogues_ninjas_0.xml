@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="dialogues_partie_0_0">
+        <item>@array/intro_partie_0_0</item>
+        <item>@array/first_mission_0_0</item>
+    </array>
+
+    <string-array name="intro_partie_0_0">
+        <item>"(-1,-1,0)/1/Kazekage/Bienvenue à toi, je suis @Kazekage@, quatrième chef du village du vent, je suis content de voir que de nouveaux apprentis cherchent à rejoindre notre alliance."</item>
+        <item>"(-1,-1,0)/1/Kazekage/Si tu partages nos idéaux de paix et de respect, nous t'accueillerons en tant qu'apprenti ninja de l'alliance. Tu te verras confier des missions qui te permettront de prouver ta valeur."</item>
+        <item>"(-1,-1,0)/1/Kazekage/Si tu nous montre ton potentiel, tu te verras confier des troupes et peut-être même des terres, ainsi qu'un grade important au sein de notre alliance."</item>
+        <item>"(-1,-1,0)/1/Hokage/Je suis @Hokage@, troisième chef du village du feu, commences d'abord par t'inscrire au registre de l'alliance si tu veux nous rejoindre."</item>
+        <item>"(-1,-1,0)/0/Okori/Super ! Nous allons pouvoir devenir des ninjas de l'alliance sans trop de difficultés, allons nous inscrire !"</item>
+        <item>"(-1,-1,0)/0/ /@@okori_join"</item>
+    </string-array>
+
+    <string-array name="dialogue_first_0_0">
+        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}Un ninja vous interpelle après que vous ayez rendu votre inscription."</item>
+        <item>"(-1,-1,1)/1/Ino/{FIRST_EVER}[VIEW_Ino](1)Bienvenue à toi dans l'alliance ninja, ça fait plaisir de voir de nouveaux visages amicaux. J'espère que tu t'en sortiras bien avec nous."</item>
+        <item>"(-1,-1,1)/1/Ino/{FIRST_EVER}Je m'appelle @Ino@, je suis un ninja superieur du village du feu, n'hésites pas à me demander de l'aide si tu en as besoin un jour."</item>
+        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}[ADD_TEAMSIZE,ADD_EQUIPE_Ino]@Ino@ a désormais rejoint votre équipe. Vous allez faire votre compte rendu aux dirigeants de l'alliance."</item>
+    </string-array>
+
+    <string-array name="first_mission_0_0">
+        <item>"(-1,-1,1)/0/ /@@dialogue_first_0_0"</item>
+        <item>"(-1,-1,1)/1/Hokage/Te voilà désormais apprenti ninja de l'alliance, j'espère que tu seras à la hauteur des missions qui te seront confié."</item>
+        <item>"(-1,-1,1)/1/Kazekage/En tant qu'apprenti ninja, tu peux t'entourer de deux autres ninjas de ton choix. Si tu deviens un ninja supèrieur, tu pourras ajouter un autre ninja à ton équipe."</item>
+        <item>"(-1,-1,1)/1/Kazekage/Bonne chance dans tes missions futures et puissent les éléments te soutenir le long de ton aventure."</item>
+        <item>"(-1,-1,1)/0/ /@@dialogue_pseudo"</item>
+    </string-array>
+</resources>
