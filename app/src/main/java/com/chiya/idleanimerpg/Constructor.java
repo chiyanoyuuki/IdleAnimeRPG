@@ -11,13 +11,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chiya.Activities.Master;
+import com.chiya.Activities.R;
+
 import androidx.core.content.ContextCompat;
 
 public class Constructor
 {
     private Context context;
 
-    public Constructor(Master master)
+    public Constructor(Context master)
     {
         this.context = master;
     }
@@ -42,7 +45,7 @@ public class Constructor
     {
         ImageView fondmission = new ImageView(context);
         fondmission.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        fondmission.setBackground(ContextCompat.getDrawable(context,R.drawable.fullbg2));
+        fondmission.setBackground(ContextCompat.getDrawable(context, R.drawable.fullbg2));
         fondmission.setAlpha(0.7f);
         return fondmission;
     }

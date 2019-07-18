@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/anime_mainlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/anime_animeview"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <ImageView
+            android:id="@+id/anime_retouraccueil"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/retour"
+            android:clickable="true"
+            android:focusable="true" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/anime_imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/fond"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/fond" />
+
+    <ScrollView
+        android:id="@+id/anime_scroll0"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/anime_layoutanime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+</LinearLayout>

@@ -2,6 +2,9 @@ package com.chiya.idleanimerpg;
 
 import android.content.res.Resources;
 
+import com.chiya.Activities.Master;
+import com.chiya.BDD.BDD;
+
 import java.util.ArrayList;
 
 public class Reactions

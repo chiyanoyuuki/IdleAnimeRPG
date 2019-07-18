@@ -1,5 +1,7 @@
 package com.chiya.idleanimerpg;
 
+import com.chiya.BDD.BDD;
+
 public class Conditions
 {
     private BDD db;

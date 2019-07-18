@@ -1,8 +1,9 @@
 package com.chiya.idleanimerpg;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Handler;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -11,11 +12,20 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import com.chiya.Activities.Master;
+import com.chiya.BDD.BDDAnime;
+import com.chiya.BDD.BDDMission;
+import com.chiya.BDD.BDDPartie;
+import com.chiya.Activities.NewActivity;
+import com.chiya.Layouts.NewFrameLayout;
+import com.chiya.Activities.R;
+
 public class Mission extends NewFrameLayout
 {
     private BDDAnime anime;
     private BDDPartie partie;
     private long time;
+    private Context context;
     private ImageView barreprogress, barre2;
     private TextView barre, start;
     private long startTime;
@@ -51,7 +61,7 @@ public class Mission extends NewFrameLayout
                 minutes = minutes % 60;
             }
             barre.setText(String.format("%02d:%02d:%02d", heures, minutes, seconds));
-            handler.postDelayed(this, 500);
+            handler.postDelayed(this, 1000);
         }
     };
 
@@ -65,6 +75,7 @@ public class Mission extends NewFrameLayout
         time = bddmission.temps();
         this.context = context;
         init();
+        verifstarted();
     }
 
     private void init()
@@ -114,7 +125,7 @@ public class Mission extends NewFrameLayout
 
     private void addClickStart()
     {
-        start.setOnClickListener(new View.OnClickListener()
+        /*start.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -122,24 +133,68 @@ public class Mission extends NewFrameLayout
                 TextView tmp = (TextView) v;
                 if(tmp.getText().equals("Lancer"))
                 {
-                    startTime = System.currentTimeMillis();
-                    handler.postDelayed(runnable, 0);
-                    start.setText("Annuler");
-                    start.setBackground(ContextCompat.getDrawable(context,R.drawable.bouton2disabled));
-                    barreprogress.setImageResource(R.drawable.progressv);
+                    BDDEquipe personnage = master.getFirstPerso();
+                    if(personnage!=null)
+                    {
+                        startTime = System.currentTimeMillis();
+                        db.missionsEnCours().add(bddmission,""+startTime,personnage);
+                        handler.postDelayed(runnable, 0);
+                        start.setText("Annuler");
+                        start.setBackground(ContextCompat.getDrawable(context,R.drawable.bouton2disabled));
+                        barreprogress.setImageResource(R.drawable.progressv);
+                        master.refreshMuraille();
+                    }
                 }
                 else if(tmp.getText().equals("Annuler"))
                 {
-                    handler.removeCallbacks(runnable);
-                    start.setText("Lancer");
-                    start.setBackground(ContextCompat.getDrawable(context,R.drawable.bouton2));
-                    barreprogress.setImageResource(R.drawable.progressr);
+                    annuler();
                 }
                 else if(tmp.getText().equals("Finir"))
                 {
+                    db.missionsEnCours().remove(bddmission);
+                    master.refreshMuraille();
                     master.finishMission(bddmission,anime.id(),partie.id());
                 }
             }
+        });*/
+    }
+
+    private void annuler()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(super.getResources().getIdentifier(bddmission.image(), "drawable", packageName));
+        builder.setTitle("Annuler mission ?");
+
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i){
+                db.missionsEnCours().remove(bddmission);
+                handler.removeCallbacks(runnable);
+                start.setText("Lancer");
+                start.setBackground(ContextCompat.getDrawable(context,R.drawable.bouton2));
+                barreprogress.setImageResource(R.drawable.progressr);
+                master.refreshMuraille();
+            }
         });
+
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i){}
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void verifstarted()
+    {
+        if(bddmission.started())
+        {
+            this.startTime = db.missionsEnCours().select(bddmission.id()).start();
+            handler.postDelayed(runnable, 0);
+            start.setText("Annuler");
+            start.setBackgroundResource(R.drawable.bouton2disabled);
+            barreprogress.setImageResource(R.drawable.progressv);
+        }
     }
 }

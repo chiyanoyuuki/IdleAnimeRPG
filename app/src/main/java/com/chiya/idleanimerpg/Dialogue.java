@@ -16,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chiya.Activities.Master;
+import com.chiya.BDD.BDDDialogue;
+import com.chiya.Layouts.NewFrameLayout;
+import com.chiya.Activities.R;
+
 import java.util.ArrayList;
 
 public class Dialogue extends NewFrameLayout
@@ -108,7 +113,7 @@ public class Dialogue extends NewFrameLayout
        {
            bulle.setVisibility(VISIBLE);
            image.setVisibility(VISIBLE);
-           image.setImageResource(context.getResources().getIdentifier(perso,"drawable",context.getPackageName()));
+           image.setImageResource(this.getContext().getResources().getIdentifier(perso,"drawable",this.getContext().getPackageName()));
            image.setScaleX(-1);
            animate(-500);
        }
@@ -125,7 +130,7 @@ public class Dialogue extends NewFrameLayout
        {
            bulle.setVisibility(VISIBLE);
            image.setVisibility(VISIBLE);
-           image.setImageResource(context.getResources().getIdentifier(perso,"drawable",context.getPackageName()));
+           image.setImageResource(this.getContext().getResources().getIdentifier(perso,"drawable",this.getContext().getPackageName()));
            image.setScaleX(1);
            animate(500);
        }
@@ -188,12 +193,12 @@ public class Dialogue extends NewFrameLayout
         bulle.setVisibility(INVISIBLE);
         image.setVisibility(INVISIBLE);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
         builder.setIcon(R.drawable.icone_reputmonde);
         builder.setTitle("Pseudo :");
         builder.setMessage("Veuillez rentrer votre pseudo");
 
-        final EditText input = new EditText(context);
+        final EditText input = new EditText(this.getContext());
         input.setText("Nouveau joueur");
         input.setPadding(50,0,0,0);
         input.setInputType(InputType.TYPE_CLASS_TEXT);

@@ -3,8 +3,9 @@
 
    <string-array name="missions_0_0">
        <item>"(-1,-1,0)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
-       <item>"(-1,-1,1)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
-       <item>"(-1,-1,1)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
+       <item>"(-1,-1,1)/Entraînement collectif/30/icone_document/60/10/10"</item>
+       <item>"(-1,-1,1)/Aider l'arrière garde/30/icone_document/50/20/10"</item>
+       <item>"(-1,-1,1)/Mission de reconnaissance/60/icone_document/60/40/20"</item>
    </string-array>
 
     <string-array name="missions_0_1">
