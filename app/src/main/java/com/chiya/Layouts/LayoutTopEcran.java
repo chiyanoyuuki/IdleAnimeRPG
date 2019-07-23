@@ -10,6 +10,7 @@ import com.chiya.BDD.BDDPersonnage;
 
 public class LayoutTopEcran
 {
+    private BDD db;
     private TextView pseudo, nbressources;
     private ImageView perso;
 
@@ -20,12 +21,19 @@ public class LayoutTopEcran
         perso           = master.findViewById(R.id.accueil_perso);
 
 
-        BDD db = master.getDb();
+        db = master.getDb();
         BDDCompte compte = db.compte().selectCompte();
         BDDPersonnage personnage = db.personnage().selectPersonnage("Okori");
 
         pseudo.setText(compte.pseudo());
         nbressources.setText(compte.ressources()+"");
         perso.setImageResource(master.getResources().getIdentifier(personnage.image(),"drawable",master.getPackageName()));
+    }
+
+    public void refresh()
+    {
+        BDDCompte compte = db.compte().selectCompte();
+
+        pseudo.setText(compte.pseudo());
     }
 }

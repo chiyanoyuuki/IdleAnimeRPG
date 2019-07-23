@@ -3,6 +3,7 @@ package com.chiya.Views;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -11,11 +12,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.chiya.Activities.R;
 import com.chiya.Activities.TestActivityFragment;
 import com.chiya.BDD.BDD;
 import com.chiya.BDD.BDDEquipe;
 
-public class PersonnageMuraille implements Animation.AnimationListener
+import java.util.Arrays;
+
+public class PersonnageMuraille implements Animation.AnimationListener, View.OnClickListener
 {
     private long startTime, time;
     private Handler handler = new Handler();
@@ -43,44 +48,46 @@ public class PersonnageMuraille implements Animation.AnimationListener
         }
     };
 
+    private BDD db;
     private boolean end;
     private int delta;
     private BDDEquipe personnage;
     private boolean available;
     private LinearLayout layout;
     private TextView pseudo, timing;
-    private FrameLayout perso, fondpseudo;
     private ImageView imgperso, imgpseudo;
+    private TestActivityFragment master;
 
     public PersonnageMuraille(TestActivityFragment master, BDDEquipe personnage)
     {
-        layout      = new LinearLayout(master);
-        fondpseudo  = new FrameLayout(master);
-        perso       = new FrameLayout(master);
-        imgperso    = new ImageView(master);
-        imgpseudo   = new ImageView(master);
-        pseudo      = new TextView(master);
-        timing      = new TextView(master);
+        this.master = master;
+        layout      = (LinearLayout) LayoutInflater.from(master).inflate(R.layout.personnagemuraille,null);
+        imgperso    = layout.findViewById(R.id.persomur_perso);
+        imgpseudo   = layout.findViewById(R.id.persomur_fondpseudo);
+        pseudo      = layout.findViewById(R.id.persomur_pseudo);
+        timing      = layout.findViewById(R.id.persomur_timing);
 
-        initLayout();
-        initPseudo();
-        initPerso();
-        initTiming();
-        add();
-        refresh(master,personnage);
+        layout.setLayoutParams(new FrameLayout.LayoutParams(250, ViewGroup.LayoutParams.MATCH_PARENT));
+        layout.setTranslationX((int)(Math.random()*1000));
+        layout.setAnimation(newanim());
+        layout.setOnClickListener(this);
+        
+        refresh(personnage);
     }
 
     //REFRESH==============================================
 
-    public void refresh(TestActivityFragment master, BDDEquipe personnage)
+    public void refresh(BDDEquipe personnage)
     {
         handler.removeCallbacks(runnable);
         timing.setTextColor(Color.parseColor("#aa2020"));
         this.personnage = personnage;
-        if(personnage.used())setUnavailable(master);
+        if(personnage.used())setUnavailable();
         else setAvailable();
+        System.out.println(personnage.pseudo());
         pseudo.setText(personnage.pseudo());
         imgperso.setImageResource(master.getResources().getIdentifier(personnage.image(),"drawable",master.getPackageName()));
+        imgpseudo.setBackgroundResource(master.getResources().getIdentifier("lvl_"+personnage.niveau(),"drawable",master.getPackageName()));
     }
 
     public void setAvailable()
@@ -91,9 +98,9 @@ public class PersonnageMuraille implements Animation.AnimationListener
         imgperso.setAlpha(1f);
     }
 
-    public void setUnavailable(TestActivityFragment master)
+    public void setUnavailable()
     {
-        BDD db = master.getDb();
+        db = master.getDb();
         available = false;
         imgperso.setAlpha(0.5f);
         String times = db.equipe().getTimes(personnage.id());
@@ -120,58 +127,6 @@ public class PersonnageMuraille implements Animation.AnimationListener
 
     //LAYOUTS==============================================
 
-    private void initLayout()
-    {
-        layout.setLayoutParams(new FrameLayout.LayoutParams(200, ViewGroup.LayoutParams.MATCH_PARENT));
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setTranslationX((int)(Math.random()*1000));
-        layout.setAnimation(newanim());
-    }
-
-    private void initPseudo()
-    {
-        fondpseudo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,2));
-
-        pseudo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        pseudo.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        pseudo.setTextColor(Color.parseColor("#ffffff"));
-        pseudo.setTypeface(pseudo.getTypeface(), Typeface.BOLD);
-
-        imgpseudo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        imgpseudo.setBackgroundColor(Color.parseColor("#202020"));
-        imgpseudo.setAlpha(0.5f);
-
-        fondpseudo.addView(imgpseudo);
-        fondpseudo.addView(pseudo);
-    }
-
-    private void initPerso()
-    {
-        perso.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,8));
-
-        imgperso.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        imgperso.setPadding(200, 0, 200, 0);
-        imgperso.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-        perso.addView(imgperso);
-    }
-
-    private void initTiming()
-    {
-        timing.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        timing.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        timing.setTypeface(timing.getTypeface(), Typeface.BOLD);
-        timing.setTranslationY(-10);
-
-        perso.addView(timing);
-    }
-
-    private void add()
-    {
-        layout.addView(fondpseudo);
-        layout.addView(perso);
-    }
-
     public LinearLayout getLayout(){return layout;}
 
     @Override
@@ -184,4 +139,21 @@ public class PersonnageMuraille implements Animation.AnimationListener
         layout.clearAnimation();
         if(!end)layout.setAnimation(newanim());
     }
+
+    @Override
+    public void onClick(View view)
+    {
+        if(personnage.used())
+        {
+            String[] tmp = db.missionsEnCours().from(personnage).split(":");
+            System.out.println(Arrays.toString(tmp));
+            master.changeEcran(Long.parseLong(tmp[0]),Long.parseLong(tmp[1]),tmp[2]);
+        }
+        else
+        {
+            master.showPerso(personnage);
+        }
+    }
+
+    public BDDEquipe getPerso(){return personnage;}
 }

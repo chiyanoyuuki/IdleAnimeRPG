@@ -69,4 +69,14 @@ public class TABLECompte
         cursor.moveToNext();
         return new BDDCompte(cursor);
     }
+
+    public String levels(long anime)
+    {
+        SQLiteDatabase db = base.getReadableDatabase();
+        Cursor cursor;
+        if(anime==-1)   cursor = db.rawQuery("SELECT NIVEAU,-1,NIVEAUG,NIVEAUM FROM COMPTE",new String[]{});
+        else            cursor = db.rawQuery("SELECT NIVEAU, (SELECT NIVEAU FROM REPUTPAYS WHERE ID="+anime+"),NIVEAUG,NIVEAUM FROM COMPTE",new String[]{});
+        cursor.moveToNext();
+        return cursor.getLong(0)+":"+cursor.getLong(1)+":"+cursor.getLong(2)+":"+cursor.getLong(3);
+    }
 }

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--
+    0-(RMONDE,RPAYS,RPARTIE)
+    1-NOM MISSION
+    2-TEMPS EN S
+    3-ICONE
+    4-RPARTIE
+    5-RPAYS
+    6-RMONDE
+    7-TYPE
+    -->
+
    <string-array name="missions_1_0">
-       <item>"(-1,-1,0)/Un tout premier cours héroique/10/icone_document/10/10/10"</item>
+       <item>"(-1,-1,0)/Un tout premier cours héroique/10/icone_document/10/10/10/0"</item>
    </string-array>
 
     <string-array name="missions_1_1">
-        <item>"(-1,-1,0)/Defier le héros/10/icone_document/10/10/10"</item>
+        <item>"(-1,-1,0)/Defier le héros/10/icone_document/10/10/10/0"</item>
     </string-array>
 
 </resources>

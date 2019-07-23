@@ -31,8 +31,7 @@ public class TABLEMission
                 "reputmonde INTEGER, " +
                 "reputpays INTEGER, " +
                 "reputpartie INTEGER, " +
-                " FOREIGN KEY (animeid)  REFERENCES anime(id)," +
-                " FOREIGN KEY (partieid) REFERENCES partie(id));");
+                "type INTEGER)");
     }
 
     public void addMission(SQLiteDatabase db, int i, int j, String[] mission, Resources resources, String packageName)
@@ -64,16 +63,17 @@ public class TABLEMission
         content.put("reputpartie"   ,mission[6]);
         content.put("animeid"       ,i);
         content.put("partieid"      ,j);
+        content.put("type"          ,mission[7]);
         db.insert("mission",null,content);
     }
 
-    public Cursor selectAllMissions(String animeid, String partieid)
+    public Cursor selectAllMissions(String animeid, String partieid, String type)
     {
         SQLiteDatabase db = base.getReadableDatabase();
         return db.rawQuery(
-                "SELECT *,1 AS ENCOURS FROM MISSION WHERE ANIMEID = "+animeid+" AND PARTIEID = "+partieid+" AND ID IN (SELECT ID FROM MISSIONSENCOURS) "+
+                "SELECT *,1 AS ENCOURS FROM MISSION WHERE (ANIMEID = "+animeid+" OR ANIMEID=-1) AND (PARTIEID = "+partieid+" OR PARTIEID=-1) AND TYPE="+type+" AND ID IN (SELECT ID FROM MISSIONSENCOURS) "+
                 "UNION "+
-                "SELECT *,0 FROM mission m WHERE animeid = "+animeid+" AND partieid = "+partieid+" AND "+
+                "SELECT *,0 FROM mission m WHERE (animeid = "+animeid+" OR ANIMEID=-1) AND (partieid = "+partieid+" OR PARTIEID=-1) AND TYPE="+type+" AND "+
                         "ID NOT IN (SELECT ID FROM MISSIONSENCOURS) AND " +
                         "(rmonde  = -1 OR rmonde  =(SELECT niveau FROM compte)) AND "+
                         "(rpays   = -1 OR rpays   =(SELECT niveau FROM reputpays WHERE id=m.animeid)) AND "+

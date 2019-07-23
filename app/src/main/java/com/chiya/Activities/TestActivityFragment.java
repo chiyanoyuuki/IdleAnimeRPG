@@ -3,24 +3,38 @@ package com.chiya.Activities;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.chiya.BDD.BDD;
+import com.chiya.BDD.BDDEquipe;
+import com.chiya.BDD.BDDMission;
 import com.chiya.Fragments.Anime;
 import com.chiya.Fragments.Missions;
 import com.chiya.Fragments.Monde;
+import com.chiya.Layouts.LayoutDialogue;
 import com.chiya.Layouts.LayoutForeground;
+import com.chiya.Layouts.ViewPerso;
+import com.chiya.idleanimerpg.Up;
 
 public class TestActivityFragment extends FragmentActivity
 {
-    private String tag;
+    private ViewPerso viewperso;
+    private Up up;
+    private String tag, packageName;
     private BDD db;
     private LayoutForeground foreground;
     private Fragment fragment;
     private long anime, partie;
+    private FrameLayout mid, ecran, front;
+    private LayoutDialogue dialogue;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -35,54 +49,71 @@ public class TestActivityFragment extends FragmentActivity
 
     private void init()
     {
+        anime=-1;partie=-1;
         db = new BDD(this);
+        viewperso = new ViewPerso(this);
         foreground = new LayoutForeground(this);
+        this.packageName = getPackageName();
+        mid = findViewById(R.id.accueil_fragm);
+        ecran = findViewById(R.id.accueil_mainlayout);
+        front = findViewById(R.id.accueil_front);
+        dialogue = new LayoutDialogue(this);
+        dialogue.set(db.dialogue().selectAllDialogues(""+-1,""+-1));
 
         fragment = new Monde();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.accueil_fragm, fragment);
         ft.commit();
+
+
+        up = new Up(this);
+        up.refresh();
+
+        //ecran.addView(viewperso.layout());
+        front.addView(viewperso.layout());
+        ecran.addView(dialogue.layout());
+        ecran.addView(up.layout());
+    }
+
+    public void changeEcran(String s)
+    {
+         if(s.equals("accueil")&&anime!=-1)
+         {
+             remove();
+             fragment = new Monde();
+             change(-1,-1,"");
+         }
     }
 
     public void changeEcran(long anime, long partie)
     {
-        if(anime==-1&&partie==-1)
+        if(this.anime!=anime||this.partie!=partie)
         {
-            remove();
-            this.anime = anime;
-            this.partie = partie;
-            fragment = new Monde();
-            change();
-        }
-        else if(anime!=-1&&partie==-1)
-        {
-            remove();
-            this.anime = anime;
-            this.partie = partie;
-            fragment = new Anime();
-            change();
-        }
-        else if(anime!=-1&&partie!=-1)
-        {
-            tag = "histoire";
-            remove();
-            this.anime = anime;
-            this.partie = partie;
-            fragment = new Missions();
-            change();
+            if(anime!=-1&&partie==-1)
+            {
+                remove();
+                fragment = new Anime();
+                change(anime,partie,"");
+            }
+            else if(anime!=-1&&partie!=-1)
+            {
+                remove();
+                fragment = new Missions();
+                change(anime,partie,"histoire");
+            }
         }
     }
 
     public void changeEcran(long anime, long partie, String tag)
     {
-        if(anime!=-1&&partie!=-1)
+        if(this.anime!=anime||this.partie!=partie||!tag.equals(this.tag))
         {
-            this.tag = tag;
-            remove();
-            this.anime = anime;
-            this.partie = partie;
-            fragment = new Missions();
-            change();
+            if(anime!=-1&&partie!=-1)
+            {
+                remove();
+                fragment = new Missions();
+                change(anime,partie,tag);
+            }
         }
     }
 
@@ -92,16 +123,90 @@ public class TestActivityFragment extends FragmentActivity
         ft.remove(fragment).commit();
     }
 
-    private void change()
+    private void change(long anime, long partie, String tag)
     {
+        this.anime = anime;
+        this.partie = partie;
+        this.tag = tag;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.accueil_fragm, fragment).commit();
+        refresh(anime,partie);
     }
 
-    public BDD getDb() {return db;}
-    public long getAnime(){return anime;}
-    public long getPartie(){return partie;}
-    public String getState(){return tag;}
+    private void refresh(long anime, long partie)
+    {
+        foreground.refreshBarres();
+        dialogue.set(db.dialogue().selectAllDialogues(""+anime,""+partie));
+    }
+
+    private void recompense()
+    {
+        int h = 20;
+        String image = "icone_reputgentil";
+        if(partie==1) image = "icone_reputmechant";
+        for (int i = 0; i < 100; i++) {
+            if (i == 59) {
+                image = "icone_reputpays";
+                h = 10;
+            }
+            if (i == 89) {
+                image = "icone_reputmonde";
+                h = 0;
+            }
+            final ImageView tmp = new ImageView(this);
+            tmp.setImageResource(super.getResources().getIdentifier(image, "drawable", packageName));
+            tmp.setLayoutParams(new LinearLayout.LayoutParams(40, 40));
+            tmp.setX(0 + (int) (Math.random() * 1000));
+            tmp.setY(600 + (int) (Math.random() * 800));
+
+            mid.addView(tmp);
+            Animation animation = new TranslateAnimation(0, -tmp.getX() - 40, 0, -tmp.getY() - 100 + h);
+            animation.setDuration(1500);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mid.removeView(tmp);
+                }
+            });
+            animation.setFillAfter(true);
+            tmp.setAnimation(animation);
+        }
+    }
+
+    public void showPerso(BDDEquipe perso)
+    {
+        viewperso.view(perso);
+    }
+
+    public void finishMission(BDDMission bddmission)
+    {
+        recompense();
+        db.up().endMissionReputs(bddmission);
+        up.refresh();
+        refresh(anime,partie);
+    }
+
+    public void changePersoPseudo(long id, String pseudo)
+    {
+        db.equipe().changePseudo(id,pseudo);
+        foreground.refreshMuraille();
+    }
+
+    public BDD getDb()              {return db;}
+    public long getAnime()          {return anime;}
+    public long getPartie()         {return partie;}
+    public String getState()        {return tag;}
+    public void refreshMuraille()   {foreground.refreshMuraille();}
+    public BDDEquipe getFirstPerso(){return foreground.getFirstPerso();}
+    public void refreshAcc()        {foreground.refreshAcc();}
 
     @Override
     public void onBackPressed(){}

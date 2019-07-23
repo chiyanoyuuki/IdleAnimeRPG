@@ -67,4 +67,11 @@ public class TABLEEquipe
         cursor.moveToNext();
         return cursor.getString(0)+":"+cursor.getLong(1);
     }
+
+    public void changePseudo(long id, String pseudo)
+    {
+        SQLiteDatabase db = base.getWritableDatabase();
+        db.execSQL("UPDATE EQUIPE SET PSEUDO = \""+pseudo+"\" WHERE ID = "+id);
+    }
 }
+

@@ -58,4 +58,12 @@ public class TABLEPersonnage
         cursor.moveToNext();
         return new BDDPersonnage(cursor);
     }
+
+    public BDDPersonnage selectPersonnage(long id)
+    {
+        SQLiteDatabase db = base.getReadableDatabase();
+        Cursor cursor =  db.rawQuery("SELECT p.*, (SELECT viewable FROM viewed WHERE id=p.id) as viewable FROM personnage p WHERE p.id=?",new String[]{""+id});
+        cursor.moveToNext();
+        return new BDDPersonnage(cursor);
+    }
 }

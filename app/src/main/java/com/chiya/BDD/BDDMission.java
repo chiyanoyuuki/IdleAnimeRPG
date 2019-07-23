@@ -26,7 +26,7 @@ public class BDDMission
         rmonde  = c.getLong(9);
         rpays   = c.getLong(10);
         rpartie = c.getLong(11);
-        started = c.getLong(12)==1;
+        started = c.getLong(13)==1;
     }
 
     public long id()        {return id;}

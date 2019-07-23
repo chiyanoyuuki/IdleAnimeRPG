@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--
+    0-(RMONDE,RPAYS,RPARTIE)
+    1-NOM MISSION
+    2-TEMPS EN S
+    3-ICONE
+    4-RPARTIE
+    5-RPAYS
+    6-RMONDE
+    7-TYPE
+    -->
+
+    <string-array name="missions_recrutements">
+        <item>"(-1,-1,-1)/Recrutement au sommet/7200/lvl_5/300/200/100/2"</item>
+        <item>"(-1,-1,-1)/Recrutement de légendes/3600/lvl_4/200/100/70/2"</item>
+        <item>"(-1,-1,-1)/Recrutement des haut gradés/1800/lvl_3/100/60/50/2"</item>
+        <item>"(-1,-1,-1)/Recrutement des confirmés/1200/lvl_2/80/50/40/2"</item>
+        <item>"(-1,-1,-1)/Recrutement d'initiés/600/lvl_1/50/30/20/2"</item>
+        <item>"(-1,-1,-1)/Recrutement d'apprentis/60/lvl_0/10/10/10/2"</item>
+    </string-array>
+
    <string-array name="missions_0_0">
-       <item>"(-1,-1,0)/Inscription au registre de l'alliance/1/icone_document/10/10/10"</item>
-       <item>"(-1,-1,1)/Entraînement collectif/30/icone_document/60/10/10"</item>
-       <item>"(-1,-1,1)/Aider l'arrière garde/30/icone_document/50/20/10"</item>
-       <item>"(-1,-1,1)/Mission de reconnaissance/60/icone_document/60/40/20"</item>
+       <item>"(-1,-1,0)/Inscription au registre de l'alliance/1/icone_document/10/10/10/0"</item>
+       <item>"(-1,-1,1)/Rejoindre les rangs/300/icone_document/200/80/40/0"</item>
+       <item>"(-1,-1,1)/Entraînement collectif/1/icone_document/60/10/10/1"</item>
+       <item>"(-1,-1,1)/Aider l'arrière garde/30/icone_document/50/20/10/1"</item>
+       <item>"(-1,-1,1)/Mission de reconnaissance/60/icone_document/60/40/20/1"</item>
    </string-array>
 
     <string-array name="missions_0_1">
-        <item>"(-1,-1,0)/Défier la recrue/1/icone_document/10/10/10"</item>
+        <item>"(-1,-1,0)/Défier la recrue/1/icone_document/10/10/10/0"</item>
     </string-array>
 
 </resources>

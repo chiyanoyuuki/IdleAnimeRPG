@@ -60,7 +60,8 @@ public class Anime extends NewFragment
         retouraccueil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                click(-1,-1);
+                TestActivityFragment master = (TestActivityFragment)getActivity();
+                master.changeEcran("accueil");
             }
         });
     }

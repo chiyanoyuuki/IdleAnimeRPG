@@ -43,10 +43,10 @@ public class TABLEPartie
         return db.rawQuery("SELECT * FROM partie WHERE animeid = ?",new String[]{animeid});
     }
 
-    public BDDPartie select(long i)
+    public BDDPartie select(long anime, long partie)
     {
         SQLiteDatabase db = base.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM PARTIE WHERE ID = "+i,new String[]{});
+        Cursor cursor = db.rawQuery("SELECT * FROM PARTIE WHERE ID="+partie+" AND ANIMEID="+anime,new String[]{});
         cursor.moveToNext();
         return new BDDPartie(cursor);
     }

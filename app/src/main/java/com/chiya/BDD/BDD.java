@@ -17,8 +17,9 @@ import com.chiya.TABLES.TABLEMissionsEnCours;
 import com.chiya.TABLES.TABLEPartie;
 import com.chiya.TABLES.TABLEPersonnage;
 import com.chiya.TABLES.TABLEReputLevels;
-import com.chiya.TABLES.TABLEReputNoms;
-import com.chiya.TABLES.TABLEReputs;
+import com.chiya.TABLES.TABLEReputStats;
+import com.chiya.TABLES.TABLEReputsPays;
+import com.chiya.TABLES.TABLEUp;
 import com.chiya.TABLES.TABLEViewed;
 
 public class BDD extends SQLiteOpenHelper
@@ -30,9 +31,10 @@ public class BDD extends SQLiteOpenHelper
 
     private TABLECompte compte;
     private TABLEEquipe equipe;
-    private TABLEReputs reputs;
+    private TABLEReputsPays reputs;
     private TABLEViewed viewed;
     private TABLEMissionsEnCours missionsEnCours;
+    private TABLEUp up;
 
     private TABLEAnime anime;
     private TABLEPartie partie;
@@ -40,7 +42,7 @@ public class BDD extends SQLiteOpenHelper
     private TABLEMission mission;
     private TABLEDialogue dialogue;
     private TABLEReputLevels reputlevels;
-    private TABLEReputNoms reputnoms;
+    private TABLEReputStats reputnoms;
 
     public BDD(Context context)
     {
@@ -53,9 +55,10 @@ public class BDD extends SQLiteOpenHelper
     {
         compte      = new TABLECompte       (this);
         equipe      = new TABLEEquipe       (this);
-        reputs      = new TABLEReputs       (this);
+        reputs      = new TABLEReputsPays(this);
         viewed      = new TABLEViewed       (this);
         missionsEnCours = new TABLEMissionsEnCours(this);
+        up          = new TABLEUp           (this);
 
         anime       = new TABLEAnime        (this);
         partie      = new TABLEPartie       (this);
@@ -63,7 +66,7 @@ public class BDD extends SQLiteOpenHelper
         mission     = new TABLEMission      (this);
         dialogue    = new TABLEDialogue     (this);
         reputlevels = new TABLEReputLevels  (this);
-        reputnoms   = new TABLEReputNoms    (this);
+        reputnoms   = new TABLEReputStats(this);
     }
 
     public void onCreate(SQLiteDatabase db)
@@ -95,6 +98,7 @@ public class BDD extends SQLiteOpenHelper
         reputs.init(db);
         viewed.init(db);
         missionsEnCours.init(db);
+        up.init(db);
     }
 
     private void initBDDInfos(SQLiteDatabase db)
@@ -122,6 +126,9 @@ public class BDD extends SQLiteOpenHelper
 
         String[] noms = resources.getStringArray(R.array.level_reput);
         reputnoms.newnomsreputs(db,-1,-1,noms);
+
+        String[] missions = resources.getStringArray(R.array.missions_recrutements);
+        for(String mission:missions){this.mission.addMission(db,-1,-1,mission.split("/"),resources,packageName);}
 
         TypedArray animes = resources.obtainTypedArray(R.array.animes);
         for(int i=0;i<animes.length();i++)
@@ -166,7 +173,7 @@ public class BDD extends SQLiteOpenHelper
                         }
                         personnages.recycle();
 
-                        String[] missions = resources.getStringArray(resources.getIdentifier("missions_"+i+"_"+j,"array",packageName));
+                        missions = resources.getStringArray(resources.getIdentifier("missions_"+i+"_"+j,"array",packageName));
 
                         for(String mission:missions)
                         {
@@ -190,9 +197,10 @@ public class BDD extends SQLiteOpenHelper
 
     public TABLECompte compte()             {return compte;}
     public TABLEEquipe equipe()             {return equipe;}
-    public TABLEReputs reputs()             {return reputs;}
+    public TABLEReputsPays reputs()             {return reputs;}
     public TABLEViewed viewed()             {return viewed;}
     public TABLEMissionsEnCours missionsEnCours(){return missionsEnCours;}
+    public TABLEUp up()                     {return up;}
 
     public TABLEAnime anime()               {return anime;}
     public TABLEPartie partie()             {return partie;}
@@ -200,5 +208,5 @@ public class BDD extends SQLiteOpenHelper
     public TABLEMission mission()           {return mission;}
     public TABLEDialogue dialogue()         {return dialogue;}
     public TABLEReputLevels reputlevels()   {return reputlevels;}
-    public TABLEReputNoms reputnoms()       {return reputnoms;}
+    public TABLEReputStats reputnoms()       {return reputnoms;}
 }

@@ -11,11 +11,13 @@ import com.chiya.BDD.BDDReputs;
 
 public class LayoutBarres
 {
+    private TestActivityFragment master;
     private String packageName;
     private ImageView[][] barres;
 
     public LayoutBarres(TestActivityFragment master)
     {
+        this.master = master;
         barres = new ImageView[3][2];
         barres[0][0] = master.findViewById(R.id.accueil_b00);
         barres[0][1] = master.findViewById(R.id.accueil_b01);
@@ -28,12 +30,41 @@ public class LayoutBarres
 
         BDD db = master.getDb();
         BDDReputs tmp = db.reputs().selectReput(-1,-1);
-        refresh(master,"progressv",0,tmp.actual(),tmp.need());
-        refresh(master,1);
-        refresh(master,2);
+        refresh("progressv",0,tmp.actual(),tmp.need());
+        refresh(1);
+        refresh(2);
     }
 
-    private void refresh(TestActivityFragment master, String couleur, int i, long actual, long need)
+    public void refresh()
+    {
+        long anime = master.getAnime();
+        long partie = master.getPartie();
+        BDD db = master.getDb();
+        BDDReputs tmp = db.reputs().selectReput(-1,-1);
+        refresh("progressv",0,tmp.actual(),tmp.need());
+        if(anime!=-1)
+        {
+            tmp = db.reputs().selectReput(anime,-1);
+            refresh("progressj",1,tmp.actual(),tmp.need());
+            if(partie!=-1)
+            {
+                tmp = db.reputs().selectReput(anime,partie);
+                if(partie==0)refresh("progressb",2,tmp.actual(),tmp.need());
+                else if(partie==1)refresh("progressr",2,tmp.actual(),tmp.need());
+            }
+            else
+            {
+                refresh(2);
+            }
+        }
+        else
+        {
+            refresh(1);
+            refresh(2);
+        }
+    }
+
+    private void refresh(String couleur, int i, long actual, long need)
     {
         int pct = (int)((actual*1.0)/(need*1.0)*100.0);
 
@@ -44,7 +75,7 @@ public class LayoutBarres
         barres[i][1].setImageResource(master.getResources().getIdentifier(couleur,"drawable",packageName));
     }
 
-    private void refresh(TestActivityFragment master, int i)
+    private void refresh(int i)
     {
         barres[i][0].setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,100));
         barres[i][0].setImageResource(R.drawable.progressg);

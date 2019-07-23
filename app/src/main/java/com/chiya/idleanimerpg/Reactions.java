@@ -2,7 +2,7 @@ package com.chiya.idleanimerpg;
 
 import android.content.res.Resources;
 
-import com.chiya.Activities.Master;
+import com.chiya.Activities.TestActivityFragment;
 import com.chiya.BDD.BDD;
 
 import java.util.ArrayList;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 public class Reactions
 {
     private BDD db;
-    private Master master;
+    private TestActivityFragment master;
     private ArrayList<String> reactions;
 
-    public Reactions(BDD db, Master master)
+    public Reactions(TestActivityFragment master)
     {
-        this.db = db;
         this.master = master;
+        this.db = master.getDb();
         this.reactions = new ArrayList<>();
     }
 

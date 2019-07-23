@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="100dp"
+    android:layout_height="160dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/persomur_fondpseudo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.7"
+            android:background="@drawable/lvl_0" />
+
+        <TextView
+            android:id="@+id/persomur_pseudo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Okori"
+            android:textColor="@android:color/background_light"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
+        <ImageView
+            android:id="@+id/persomur_perso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="100dp"
+            android:paddingEnd="100dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bdd_perso_okori" />
+
+        <TextView
+            android:id="@+id/persomur_timing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#14216B"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationY="-2dp" />
+    </FrameLayout>
+
+</LinearLayout>

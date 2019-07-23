@@ -24,7 +24,10 @@ public class TABLEMissionsEnCours
                 "id INTEGER PRIMARY KEY, " +
                 "start TEXTL, " +
                 "equipeid INTEGER, " +
-                "bonus TEXTL);");
+                "bonus TEXTL, " +
+                "jumpanime INTEGER, " +
+                "jumppartie INTEGER, " +
+                "jumpstate TEXTL );");
     }
 
     public BDDMissionEnCours select(long id)
@@ -37,7 +40,7 @@ public class TABLEMissionsEnCours
         return mission;
     }
 
-    public void add(BDDMission mission, String start, BDDEquipe perso)
+    public void add(BDDMission mission, String start, BDDEquipe perso, long anime, long partie,String state)
     {
         SQLiteDatabase db = base.getWritableDatabase();
         ContentValues content = new ContentValues();
@@ -45,6 +48,9 @@ public class TABLEMissionsEnCours
         content.put("start",start);
         content.put("equipeid",perso.id());
         content.put("bonus","");
+        content.put("jumpanime",anime);
+        content.put("jumppartie",partie);
+        content.put("jumpstate",state);
         db.insert("missionsencours",null,content);
     }
 
@@ -58,8 +64,8 @@ public class TABLEMissionsEnCours
     public String from(BDDEquipe perso)
     {
         SQLiteDatabase db = base.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT ANIMEID, PARTIEID FROM MISSION WHERE ID = (SELECT ID FROM MISSIONSENCOURS WHERE EQUIPEID="+perso.id()+")",new String[]{});
+        Cursor cursor = db.rawQuery("SELECT JUMPANIME, JUMPPARTIE, JUMPSTATE FROM MISSIONSENCOURS WHERE EQUIPEID="+perso.id(),new String[]{});
         cursor.moveToNext();
-        return cursor.getLong(0)+":"+cursor.getLong(1);
+        return cursor.getLong(0)+":"+cursor.getLong(1)+":"+cursor.getString(2);
     }
 }

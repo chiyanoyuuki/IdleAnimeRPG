@@ -35,6 +35,7 @@
                     android:id="@+id/accueil_perso"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/testbg2"
                     android:paddingStart="120dp"
                     android:paddingTop="10dp"
                     android:paddingEnd="120dp"
@@ -59,7 +60,7 @@
                 android:id="@+id/accueil_nbressources"
                 android:layout_width="50dp"
                 android:layout_height="20dp"
-                android:background="@drawable/testbg"
+                android:background="@drawable/testbg2"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 android:textAlignment="center"
@@ -168,7 +169,15 @@
                 android:id="@+id/accueil_fragm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/testbg">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/accueil_front"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             </FrameLayout>
 
@@ -220,6 +229,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingTop="12dp"
                 android:paddingBottom="5dp"
                 android:src="@drawable/accueil" />
@@ -229,6 +240,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
                 android:src="@drawable/personnages" />
@@ -238,6 +251,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingTop="15dp"
                 android:paddingBottom="8dp"
                 android:src="@drawable/stats" />

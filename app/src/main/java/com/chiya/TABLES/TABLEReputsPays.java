@@ -8,11 +8,11 @@ import com.chiya.BDD.BDD;
 import com.chiya.BDD.BDDMission;
 import com.chiya.BDD.BDDReputs;
 
-public class TABLEReputs
+public class TABLEReputsPays
 {
     private BDD base;
 
-    public TABLEReputs(BDD base)
+    public TABLEReputsPays(BDD base)
     {
         this.base = base;
     }
