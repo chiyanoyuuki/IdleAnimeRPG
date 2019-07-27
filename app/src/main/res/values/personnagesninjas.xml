@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--
+    <string-array name="">
+        <item>"PRENOM"</item>
+        <item>"VISIBLE(0/1)</item>
+        <item>"IMAGE"</item>
+        <item>"NIVEAU"</item>
+        <item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
+    </string-array>
+    -->
+
     <string-array name="Okori">
         <item>"Okori"</item>
         <item>"1"</item>
         <item>"okori"</item>
         <item>0</item>
+        <item>"Sansubi"</item>
+        <item>"1"</item>
+        <item>"17"</item>
+        <item>"1.63"</item>
+        <item>"Origine"</item>
+        <item>"Okori est originaire du village de la brume dans le pays des ninjas. Elle a vite voulu devenir ninja pour pouvoir parcourir le monde et rencontrer des personnes qui pourraient partager ses idéaux de paix dans le monde.\n\nSes parents sont des travailleurs dans son village mais n'ont jamais développé de compétences ninja."</item>
     </string-array>
 
     <string-array name="Hokage">
@@ -13,12 +34,24 @@
         <item>"1"</item>
         <item>"hokage"</item>
         <item>5</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
     <string-array name="Kazekage">
         <item>"Guren"</item>
         <item>"1"</item>
         <item>"kazekage"</item>
         <item>5</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Ino">
@@ -26,6 +59,12 @@
         <item>"0"</item>
         <item>"ino"</item>
         <item>2</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Madara">
@@ -33,6 +72,12 @@
         <item>"1"</item>
         <item>"madara"</item>
         <item>5</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Orochimaru">
@@ -40,6 +85,12 @@
         <item>"0"</item>
         <item>"orochimaru"</item>
         <item>4</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Sakura">
@@ -47,6 +98,12 @@
         <item>"0"</item>
         <item>"sakura"</item>
         <item>3</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Naruto">
@@ -54,6 +111,12 @@
         <item>"0"</item>
         <item>"naruto"</item>
         <item>3</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Sasuke">
@@ -61,6 +124,12 @@
         <item>"0"</item>
         <item>"sasuke"</item>
         <item>3</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Kakashi">
@@ -68,6 +137,12 @@
         <item>"0"</item>
         <item>"kakashi"</item>
         <item>4</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Zabuza">
@@ -75,6 +150,12 @@
         <item>"0"</item>
         <item>"zabuza"</item>
         <item>2</item>
+    	<item>"Kashinato"</item>
+        <item>"0"</item>
+        <item>"21"</item>
+        <item>"1.83"</item>
+        <item>"Démon"</item>
+        <item>"Mazuku est un orphelin de guerre du village du brouillard. Il a été très rapidement recueuilli par des renégats dans son pays et formé à tuer. Dès ses 16 ans, il s'enfuya en emportant avec lui tous les ninjas qu'il avait affronté et considéré comme pouvant être utiles à son projet de conquérir le pays des ninjas.\n\nLors d'une attaque sur le village du feu, le chef de l'armée renégate des ninjas prend Mazuku sous son aile et lui donne une place d'importance au sein de sa coalition."</item>
     </string-array>
 
     <string-array name="Hinata">
@@ -82,6 +163,12 @@
         <item>"0"</item>
         <item>"hinata"</item>
         <item>2</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Shikamaru">
@@ -89,6 +176,12 @@
         <item>"0"</item>
         <item>"shikamaru"</item>
         <item>2</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Pain">
@@ -96,6 +189,12 @@
         <item>"1"</item>
         <item>"pain"</item>
         <item>5</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
     <string-array name="Tayuya">
@@ -103,6 +202,12 @@
         <item>"0"</item>
         <item>"tayuya"</item>
         <item>2</item>
+    	<item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 
 </resources>

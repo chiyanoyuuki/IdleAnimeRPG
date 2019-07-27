@@ -5,5 +5,11 @@
         <item>"0"</item>
         <item>"kichiro"</item>
         <item>0</item>
+        <item>"NOM"</item>
+        <item>"SEXE(0/1)"</item>
+        <item>"AGE"</item>
+        <item>"TAILLE"</item>
+        <item>"TRADUCTION"</item>
+        <item>"HISTOIRE"</item>
     </string-array>
 </resources>

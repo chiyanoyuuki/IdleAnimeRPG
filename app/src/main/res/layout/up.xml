@@ -101,16 +101,22 @@
             android:textStyle="bold"
             android:typeface="serif" />
 
-        <TextView
-            android:id="@+id/up_desc"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:background="@drawable/testbg"
-            android:padding="20dp"
-            android:text="Votre réputation au sein du pays des ninjas à désormais atteint un cap. Vous êtes désormais considéré comme un ninja supérieur de ce pays."
-            android:textAlignment="center"
-            android:textColor="@android:color/background_light" />
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/up_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/testbg"
+                android:padding="20dp"
+                android:text="Votre réputation au sein du pays des ninjas à désormais atteint un cap. Vous êtes désormais considéré comme un ninja supérieur de ce pays."
+                android:textAlignment="center"
+                android:textColor="@android:color/background_light" />
+        </ScrollView>
 
         <ScrollView
             android:layout_width="match_parent"

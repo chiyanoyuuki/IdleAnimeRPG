@@ -22,9 +22,11 @@ public class Up implements View.OnClickListener
     private LinearLayout recomp;
     private TestActivityFragment master;
     private ArrayList<String[]> ups;
+    private Reactions reactions;
 
     public Up(TestActivityFragment master)
     {
+        reactions = new Reactions(master);
         layout  = (FrameLayout) LayoutInflater.from(master).inflate(R.layout.up,null);
         level   = layout.findViewById(R.id.up_level);
         reput   = layout.findViewById(R.id.up_reput);
@@ -86,7 +88,8 @@ public class Up implements View.OnClickListener
         level.setText(up[2]);
         grade.setText(up[3]);
         desc.setText(up[4]);
-        for(String s : up[5].split(","))addRecomp(s);
+        if(up[5].matches(" *")) addRecomp("Aucun bonus gagné à ce niveau.");
+        else {for(String s : up[5].split(","))addRecomp(s);}
     }
 
     private void addRecomp(String recomp)
@@ -96,7 +99,7 @@ public class Up implements View.OnClickListener
         lp.setMargins(0,0,0,10);
         tmp.setLayoutParams(lp);
         tmp.setTextColor(Color.parseColor("#ffffff"));
-        tmp.setText("- "+recomp);
+        tmp.setText("- "+reactions.addUp(recomp));
         this.recomp.addView(tmp);
     }
 
@@ -104,6 +107,7 @@ public class Up implements View.OnClickListener
 
     public void onClick(View view)
     {
+        reactions.set();
         String[] up = ups.get(0);
         master.getDb().up().remove(up);
         ups.remove(0);

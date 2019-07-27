@@ -139,6 +139,10 @@ public class Missions extends NewFragment implements View.OnClickListener
         {
             master.changeEcran(anime.id(),-1);
         }
+        else if(tag.matches("[0-9]+"))
+        {
+            master.showPerso(tag);
+        }
         else
         {
             master.changeEcran(anime.id(),partie.id(),tag);
@@ -240,6 +244,8 @@ public class Missions extends NewFragment implements View.OnClickListener
         if(!personnage.viewable())perso.setColorFilter(Color.parseColor("#000000"));
         perso.setScaleType(ImageView.ScaleType.CENTER_CROP);
         perso.setPadding(200,0,200,0);
+        perso.setTag(""+personnage.id());
+        perso.setOnClickListener(this);
         return perso;
     }
 }

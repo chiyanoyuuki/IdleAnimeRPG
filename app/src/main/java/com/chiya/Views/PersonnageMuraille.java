@@ -1,6 +1,8 @@
 package com.chiya.Views;
 
 import android.graphics.Color;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -84,7 +86,6 @@ public class PersonnageMuraille implements Animation.AnimationListener, View.OnC
         this.personnage = personnage;
         if(personnage.used())setUnavailable();
         else setAvailable();
-        System.out.println(personnage.pseudo());
         pseudo.setText(personnage.pseudo());
         imgperso.setImageResource(master.getResources().getIdentifier(personnage.image(),"drawable",master.getPackageName()));
         imgpseudo.setBackgroundResource(master.getResources().getIdentifier("lvl_"+personnage.niveau(),"drawable",master.getPackageName()));

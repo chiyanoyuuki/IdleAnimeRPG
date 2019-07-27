@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -66,7 +67,8 @@
                     android:layout_height="match_parent"
                     android:paddingStart="200dp"
                     android:paddingEnd="200dp"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@drawable/bdd_perso_hinata" />
 
             </FrameLayout>
 
@@ -91,10 +93,12 @@
                         android:paddingStart="10dp"
                         android:text="Prénom : NAN"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/perso_nom"
+                        android:id="@+id/perso_nomdesc"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
@@ -102,10 +106,12 @@
                         android:paddingStart="10dp"
                         android:text="Nom : NAN"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/perso_sexe"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
@@ -113,10 +119,12 @@
                         android:paddingStart="10dp"
                         android:text="Sexe : NAN"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView7"
+                        android:id="@+id/perso_age"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
@@ -124,10 +132,12 @@
                         android:paddingStart="10dp"
                         android:text="Âge : NAN ans"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/perso_taille"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
@@ -135,6 +145,21 @@
                         android:paddingStart="10dp"
                         android:text="Taille : NANm"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/perso_trad"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@drawable/testbg2"
+                        android:paddingStart="10dp"
+                        android:text="Trait : NAN"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -148,77 +173,63 @@
                         android:background="@drawable/fond" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/perso_pays"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
                         android:background="@drawable/testbg2"
                         android:paddingStart="10dp"
-                        android:text="Niveau : NAN"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/perso_partie"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
                         android:background="@drawable/testbg2"
                         android:paddingStart="10dp"
-                        android:text="Pays : NAN"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/perso_lvl"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginBottom="2dp"
                         android:background="@drawable/testbg2"
                         android:paddingStart="10dp"
-                        android:text="Lieu : NAN"
+                        android:text="Niveau de base : NAN"
                         android:textColor="@android:color/background_light"
+                        android:textSize="12dp"
+                        android:gravity="center_vertical"
                         android:textStyle="bold" />
                 </LinearLayout>
             </ScrollView>
 
         </LinearLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:orientation="vertical">
+            android:background="@drawable/testbg">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/perso_description"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/fondtop"
-                android:gravity="center"
-                android:text="Okori"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:text="Okori est originaire du village de la brume dans le pays des ninjas. Elle a vite voulu devenir ninja pour pouvoir parcourir le monde et rencontrer des personnes qui pourraient partager ses idéaux de paix dans le monde.\n\nSes parents sont des travailleurs dans son village mais n'ont jamais développé de compétences ninja."
                 android:textColor="@android:color/background_light"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/testbg">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:scrollbarAlwaysDrawHorizontalTrack="false"
-                    android:scrollbarAlwaysDrawVerticalTrack="false"
-                    android:text="Okori est originaire du village de la brume dans le pays des ninjas. Elle a vite voulu devenir ninja pour pouvoir parcourir le monde et rencontrer des personnes qui pourraient partager ses idéaux de paix dans le monde.\n\nSes parents sont des travailleurs dans son village mais n'ont jamais développé de compétences ninja."
-                    android:textColor="@android:color/background_light"
-                    android:textSize="16sp" />
-            </ScrollView>
-
-        </LinearLayout>
+                android:textSize="14sp" />
+        </ScrollView>
 
     </LinearLayout>
 

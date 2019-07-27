@@ -19,13 +19,17 @@ import com.chiya.BDD.BDDMission;
 import com.chiya.Fragments.Anime;
 import com.chiya.Fragments.Missions;
 import com.chiya.Fragments.Monde;
+import com.chiya.Layouts.Equipe;
 import com.chiya.Layouts.LayoutDialogue;
 import com.chiya.Layouts.LayoutForeground;
+import com.chiya.Layouts.Stats;
 import com.chiya.Layouts.ViewPerso;
 import com.chiya.idleanimerpg.Up;
 
 public class TestActivityFragment extends FragmentActivity
 {
+    private Stats stats;
+    private Equipe equipe;
     private ViewPerso viewperso;
     private Up up;
     private String tag, packageName;
@@ -52,6 +56,8 @@ public class TestActivityFragment extends FragmentActivity
         anime=-1;partie=-1;
         db = new BDD(this);
         viewperso = new ViewPerso(this);
+        equipe = new Equipe(this);
+        stats = new Stats(this);
         foreground = new LayoutForeground(this);
         this.packageName = getPackageName();
         mid = findViewById(R.id.accueil_fragm);
@@ -70,6 +76,8 @@ public class TestActivityFragment extends FragmentActivity
         up.refresh();
 
         //ecran.addView(viewperso.layout());
+        front.addView(stats.layout());
+        front.addView(equipe.layout());
         front.addView(viewperso.layout());
         ecran.addView(dialogue.layout());
         ecran.addView(up.layout());
@@ -77,11 +85,26 @@ public class TestActivityFragment extends FragmentActivity
 
     public void changeEcran(String s)
     {
-         if(s.equals("accueil")&&anime!=-1)
+         if(s.equals("accueil")&&(anime!=-1||viewperso.isVisible()||equipe.isVisible()||stats.isVisible()))
          {
              remove();
              fragment = new Monde();
              change(-1,-1,"");
+             viewperso.invis();
+             stats.invis();
+             equipe.invis();
+         }
+         else if(s.equals("equipe")&&!equipe.isVisible())
+         {
+             stats.invis();
+             viewperso.invis();
+             equipe.init();
+         }
+         else if(s.equals("stats")&&!stats.isVisible())
+         {
+             equipe.invis();
+             viewperso.invis();
+             stats.init();
          }
     }
 
@@ -184,6 +207,10 @@ public class TestActivityFragment extends FragmentActivity
     public void showPerso(BDDEquipe perso)
     {
         viewperso.view(perso);
+    }
+    public void showPerso(String s)
+    {
+        viewperso.view(s);
     }
 
     public void finishMission(BDDMission bddmission)

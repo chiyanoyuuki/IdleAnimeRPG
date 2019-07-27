@@ -1,7 +1,6 @@
 package com.chiya.Layouts;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.text.Editable;
@@ -27,7 +26,7 @@ public class ViewPerso implements View.OnClickListener
     private BDDPersonnage personnage;
     private TestActivityFragment master;
     private LinearLayout layout;
-    private TextView prenom, nom, pseudo;
+    private TextView prenom, nom, pseudo, description, sexe, age, taille, trad, lvl, pays, partie;
     private ImageView retour, image, rename;
     private FrameLayout fondimage;
 
@@ -36,13 +35,21 @@ public class ViewPerso implements View.OnClickListener
         this.master = master;
         layout      = (LinearLayout) LayoutInflater.from(master).inflate(R.layout.perso,null);
         prenom      = layout.findViewById(R.id.perso_prenom);
-        nom         = layout.findViewById(R.id.perso_nom);
+        nom         = layout.findViewById(R.id.perso_nomdesc);
 
         retour      = layout.findViewById(R.id.perso_retour);
         image       = layout.findViewById(R.id.perso_image);
         fondimage   = layout.findViewById(R.id.perso_fondimage);
         pseudo      = layout.findViewById(R.id.perso_pseudo);
         rename      = layout.findViewById(R.id.perso_rename);
+        description = layout.findViewById(R.id.perso_description);
+        sexe        = layout.findViewById(R.id.perso_sexe);
+        age         = layout.findViewById(R.id.perso_age);
+        taille      = layout.findViewById(R.id.perso_taille);
+        trad        = layout.findViewById(R.id.perso_trad);
+        lvl         = layout.findViewById(R.id.perso_lvl);
+        pays        = layout.findViewById(R.id.perso_pays);
+        partie      = layout.findViewById(R.id.perso_partie);
 
         rename.setOnClickListener(this);
         retour.setOnClickListener(this);
@@ -54,7 +61,14 @@ public class ViewPerso implements View.OnClickListener
     {
         LinearLayout tmp = (LinearLayout) LayoutInflater.from(master).inflate(R.layout.perso,null);
         init(tmp,prenom,R.id.perso_prenom);
-        init(tmp,nom,R.id.perso_nom);
+        init(tmp,nom,R.id.perso_nomdesc);
+        init(tmp,sexe,R.id.perso_sexe);
+        init(tmp,age,R.id.perso_age);
+        init(tmp,taille,R.id.perso_taille);
+        init(tmp,trad,R.id.perso_trad);
+        init(tmp,lvl,R.id.perso_lvl);
+        init(tmp,pays,R.id.perso_pays);
+        init(tmp,partie,R.id.perso_partie);
     }
 
     private void init(LinearLayout tmp,TextView tv,int id)
@@ -70,13 +84,46 @@ public class ViewPerso implements View.OnClickListener
         personnage = master.getDb().personnage().selectPersonnage(tmp.persoid());
 
         pseudo.setText(tmp.pseudo());
+        known();
+    }
+
+    public void view(String s)
+    {
+        reinit();
+        personnage = master.getDb().personnage().selectPersonnage(Long.parseLong(s));
+
+        pseudo.setText(personnage.prenom());
+        rename.setVisibility(View.INVISIBLE);
+
+        known();
+        if(!personnage.viewable()) unknown();
+    }
+
+    private void known()
+    {
         image.setImageResource          (master.getResources().getIdentifier(personnage.image(),                "drawable",master.getPackageName()));
         fondimage.setBackgroundResource (master.getResources().getIdentifier("lvl_"+personnage.niveau(),  "drawable",master.getPackageName()));
-
-        change(prenom,personnage.nom());
-        change(nom,"TEST");
-
+        image.clearColorFilter();
+        description.setText(personnage.description());
+        change(prenom,personnage.prenom());
+        change(nom,personnage.nom());
+        change(sexe,personnage.sexe());
+        change(age,personnage.age());
+        change(taille,personnage.taille());
+        change(trad,personnage.traduction());
+        change(lvl,""+personnage.niveau());
+        pays.setText(master.getDb().anime().select(personnage.animeid()).nom());
+        partie.setText(master.getDb().partie().select(personnage.animeid(),personnage.partieid()).nom());
         layout.setVisibility(View.VISIBLE);
+    }
+
+    private void unknown()
+    {
+        change(prenom,"???");
+        change(nom,"???");
+        pseudo.setText("???");
+        image.setColorFilter(Color.parseColor("#000000"));
+        description.setText("Vous ne connaissez pas encore ce personnage...\n\nTemptez de recruter des personnes dans son lieu d'origine ou d'y effectuer des missions pour avoir une chance de le croiser.");
     }
 
     private void change(TextView tv,String s)
@@ -85,6 +132,9 @@ public class ViewPerso implements View.OnClickListener
     }
 
     public LinearLayout layout(){return layout;}
+
+    public boolean isVisible(){return layout.getVisibility()==View.VISIBLE;}
+    public void invis(){layout.setVisibility(View.INVISIBLE);}
 
     @Override
     public void onClick(View view)

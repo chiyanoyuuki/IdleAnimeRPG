@@ -17,7 +17,7 @@
         <item>"(-1,-1,1)/-1/ /{FIRST_EVER}Vous dominez le combat et êtes sur le point d'achever votre adversaire lorsqu'un ninja s'interpose entre vous et votre cible."</item>
         <item>"(-1,-1,1)/1/Zabuza/{FIRST_EVER}(1)Ca suffit ! Le combat était intéressant même pour des débutants, j'aime ton esprit de combativité et ta soif de vaincre, mais on va le laisser en vie."</item>
         <item>"(-1,-1,1)/1/Zabuza/{FIRST_EVER}[VIEW_Zabuza]Je suis @Zabuza@, un des caporals de notre armée, tu m'intéresse beaucoup, je vais t'aider à t'intégrer avec nous et tu me rendras la pareille plus tard."</item>
-        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}[ADD_TEAMSIZE,ADD_EQUIPE_Zabuza]@Zabuza@ a désormais rejoint votre équipe. Vous retournez voir les généraux de l'armée."</item>
+        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}[ADD_EQUIPE_Zabuza]@Zabuza@ a désormais rejoint votre équipe. Vous retournez voir les généraux de l'armée."</item>
     </string-array>
 
     <string-array name="first_mission_0_1">

@@ -18,7 +18,7 @@
         <item>"(-1,-1,1)/-1/ /{FIRST_EVER}Un ninja vous interpelle après que vous ayez rendu votre inscription."</item>
         <item>"(-1,-1,1)/1/Ino/{FIRST_EVER}[VIEW_Ino](1)Bienvenue à toi dans l'alliance ninja, ça fait plaisir de voir de nouveaux visages amicaux. J'espère que tu t'en sortiras bien avec nous."</item>
         <item>"(-1,-1,1)/1/Ino/{FIRST_EVER}Je m'appelle @Ino@, je suis un ninja superieur du village du feu, n'hésites pas à me demander de l'aide si tu en as besoin un jour."</item>
-        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}[ADD_TEAMSIZE,ADD_EQUIPE_Ino]@Ino@ a désormais rejoint votre équipe. Vous allez faire votre compte rendu aux dirigeants de l'alliance."</item>
+        <item>"(-1,-1,1)/-1/ /{FIRST_EVER}[ADD_EQUIPE_Ino]@Ino@ a désormais rejoint votre équipe. Vous allez faire votre compte rendu aux dirigeants de l'alliance."</item>
     </string-array>
 
     <string-array name="first_mission_0_0">

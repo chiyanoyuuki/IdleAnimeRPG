@@ -26,6 +26,6 @@ public class TABLEViewed
     public void view(String perso)
     {
         SQLiteDatabase db = base.getWritableDatabase();
-        db.execSQL("UPDATE viewed SET viewable=1 WHERE ID=(SELECT id FROM personnage WHERE nom=\""+perso+"\")");
+        db.execSQL("UPDATE viewed SET viewable=1 WHERE ID=(SELECT id FROM personnage WHERE PRENOM=\""+perso+"\")");
     }
 }

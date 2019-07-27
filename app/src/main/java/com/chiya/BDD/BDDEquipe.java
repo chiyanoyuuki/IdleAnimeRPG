@@ -10,6 +10,7 @@ public class BDDEquipe
     private long persoid;
     private String image;
     private boolean used;
+    private long place;
 
     public BDDEquipe(Cursor cursor)
     {
@@ -19,6 +20,7 @@ public class BDDEquipe
         this.persoid    = cursor.getLong(3);
         this.image      = cursor.getString(5);
         this.used       = cursor.getLong(6)==1;
+        this.place      = cursor.getLong(7);
     }
 
     public long id(){return id;}
@@ -27,9 +29,10 @@ public class BDDEquipe
     public long persoid(){return persoid;}
     public String image(){return image;}
     public boolean used(){return used;}
+    public String place(){return ""+place;}
 
     public String toString()
     {
-        return id+":"+pseudo+":"+persoid+":"+used;
+        return id+":"+pseudo+":"+persoid+":"+used+":"+place;
     }
 }

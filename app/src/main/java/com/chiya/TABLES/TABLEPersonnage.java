@@ -20,11 +20,17 @@ public class TABLEPersonnage
     {
         db.execSQL("CREATE TABLE personnage (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nom TEXTL UNIQUE, " +
+                "prenom TEXTL UNIQUE, " +
                 "animeid INTEGER, " +
                 "partieid INTEGER, " +
                 "image TEXTL, " +
                 "niveau INTEGER, " +
+                "nom TEXTL, " +
+                "sexe TEXTL, " +
+                "age TEXTL, " +
+                "taille TEXTL, " +
+                "traduction TEXTL, " +
+                "description TEXTL, " +
                 " FOREIGN KEY (animeid)  REFERENCES anime(id)," +
                 " FOREIGN KEY (partieid) REFERENCES partie(id));");
     }
@@ -32,15 +38,22 @@ public class TABLEPersonnage
     public void addPersonnage(SQLiteDatabase db, int i, int j, String[] personnage)
     {
         ContentValues content = new ContentValues();
-        content.put("nom"       ,personnage[0]);
+        content.put("prenom"       ,personnage[0]);
         content.put("animeid"   ,i);
         content.put("partieid"  ,j);
         content.put("image"     ,"bdd_perso_"+personnage[2]);
         content.put("niveau"    ,personnage[3]);
+        content.put("nom",personnage[4]);
+        content.put("sexe",personnage[5]);
+        content.put("age",personnage[6]);
+        content.put("taille",personnage[7]);
+        content.put("traduction",personnage[8]);
+        content.put("description",personnage[9]);
+
         db.insert("personnage",null,content);
 
         db.execSQL("INSERT INTO viewed(id,viewable) VALUES (" +
-                "(SELECT id FROM personnage WHERE nom=\""+personnage[0]+"\")," +
+                "(SELECT id FROM personnage WHERE prenom=\""+personnage[0]+"\")," +
                 personnage[1] +
                 ")");
     }
@@ -54,7 +67,7 @@ public class TABLEPersonnage
     public BDDPersonnage selectPersonnage(String nom)
     {
         SQLiteDatabase db = base.getReadableDatabase();
-        Cursor cursor =  db.rawQuery("SELECT p.*, (SELECT viewable FROM viewed WHERE id=p.id) as viewable FROM personnage p WHERE p.nom=?",new String[]{nom});
+        Cursor cursor =  db.rawQuery("SELECT p.*, (SELECT viewable FROM viewed WHERE id=p.id) as viewable FROM personnage p WHERE p.prenom=?",new String[]{nom});
         cursor.moveToNext();
         return new BDDPersonnage(cursor);
     }

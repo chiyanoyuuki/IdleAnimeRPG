@@ -26,6 +26,14 @@ public class Reactions
         for(String reac:reacs){reactions.add(reac);}
     }
 
+    public String addUp(String s)
+    {
+        reactions.add(s);
+        String retour = s;
+        if(s.equals("ADD_TEAMSIZE")) retour = "Nouvel emplacement d'équipe";
+        return retour;
+    }
+
     public void doReac(String s)
     {
         if(s.equals         ("COMPTE_START"))   {db.compte().start();}

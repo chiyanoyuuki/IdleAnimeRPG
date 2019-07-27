@@ -25,30 +25,47 @@ public class TABLEEquipe
                 "inteam INTEGER, " +
                 "image TEXTL, " +
                 "used INTEGER, " +
+                "place INTEGER, " +
                 " FOREIGN KEY (persoid)  REFERENCES personnage(id));");
     }
 
     public Cursor selectEquipe()
     {
         SQLiteDatabase db = base.getReadableDatabase();
-        return db.rawQuery("SELECT  * FROM equipe WHERE inteam=1",new String[]{});
+        return db.rawQuery("SELECT  * FROM equipe WHERE inteam=1 ORDER BY place",new String[]{});
+    }
+
+    public Cursor selectAll()
+    {
+        SQLiteDatabase db = base.getReadableDatabase();
+        return db.rawQuery("SELECT  * FROM equipe ORDER BY NIVEAU DESC",new String[]{});
+    }
+
+    public BDDEquipe select(String id)
+    {
+        SQLiteDatabase db = base.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT  * FROM equipe WHERE ID="+id,new String[]{});
+        cursor.moveToNext();
+        return new BDDEquipe(cursor);
     }
 
     public void addequipe(String nom)
     {
         SQLiteDatabase db = base.getWritableDatabase();
-        db.execSQL("INSERT INTO equipe(pseudo,niveau,persoid,inteam,image) VALUES(" +
+        db.execSQL("INSERT INTO equipe(pseudo,niveau,persoid,inteam,image,used,place) VALUES(" +
                 "\""+nom+"\"," +
-                "(SELECT NIVEAU FROM PERSONNAGE WHERE NOM=\""+nom+"\")," +
-                "(SELECT id FROM personnage WHERE nom=\""+nom+"\")," +
-                "(CASE WHEN (SELECT COUNT(*) FROM equipe WHERE inteam=1)<(SELECT teamsize FROM COMPTE WHERE id=1) THEN 1 ELSE 0 END)," +
-                "(SELECT image FROM personnage WHERE nom=\""+nom+"\"))");
+                "(SELECT NIVEAU FROM PERSONNAGE WHERE PRENOM=\""+nom+"\")," +
+                "(SELECT id FROM personnage WHERE PRENOM=\""+nom+"\")," +
+                "(CASE WHEN (SELECT COUNT(*) FROM equipe WHERE inteam=1)<(SELECT teamsize FROM COMPTE) THEN 1 ELSE 0 END)," +
+                "(SELECT image FROM personnage WHERE PRENOM=\""+nom+"\")," +
+                "0," +
+                "(CASE WHEN (SELECT COUNT(*) FROM equipe WHERE inteam=1)<(SELECT teamsize FROM COMPTE) THEN (SELECT TEAMSIZE FROM COMPTE) ELSE 0 END))");
     }
 
     public boolean gotPerso(String s)
     {
         SQLiteDatabase db = base.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM EQUIPE E,PERSONNAGE P WHERE E.PERSOID=P.ID AND P.NOM=?",new String[]{s});
+        Cursor cursor = db.rawQuery("SELECT * FROM EQUIPE E,PERSONNAGE P WHERE E.PERSOID=P.ID AND P.PRENOM=?",new String[]{s});
         boolean b = cursor.moveToNext();
         cursor.close();
         return b;
@@ -72,6 +89,38 @@ public class TABLEEquipe
     {
         SQLiteDatabase db = base.getWritableDatabase();
         db.execSQL("UPDATE EQUIPE SET PSEUDO = \""+pseudo+"\" WHERE ID = "+id);
+    }
+
+    public void switchteam(String s1, String s2)
+    {
+        System.out.println("SWITCH:"+s1+" <=> "+s2);
+        SQLiteDatabase db = base.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT PLACE, (SELECT PLACE FROM EQUIPE WHERE ID="+s2+") FROM EQUIPE WHERE ID="+s1,new String[]{});
+        cursor.moveToNext();
+
+        long i = cursor.getLong(0);
+        long j = cursor.getLong(1);
+
+        db.execSQL("UPDATE EQUIPE SET PLACE = (CASE " +
+                " WHEN ID="+s1+" THEN "+j +
+                " WHEN ID="+s2+" THEN "+i +
+                " ELSE PLACE " +
+                " END)");
+    }
+    public boolean switchnew(String s1, String s2)
+    {
+        SQLiteDatabase db = base.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT INTEAM FROM EQUIPE WHERE ID="+s2,new String[]{});
+        cursor.moveToNext();
+
+        if(cursor.getLong(0)==1)return false;
+
+        db.execSQL("UPDATE EQUIPE SET INTEAM=1, PLACE=(SELECT PLACE FROM EQUIPE WHERE ID="+s1+") WHERE ID="+s2);
+        db.execSQL("UPDATE EQUIPE SET INTEAM=0 WHERE ID="+s1);
+
+        return true;
     }
 }
 

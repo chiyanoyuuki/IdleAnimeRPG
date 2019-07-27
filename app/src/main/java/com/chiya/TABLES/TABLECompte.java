@@ -60,6 +60,7 @@ public class TABLECompte
     {
         SQLiteDatabase db = base.getWritableDatabase();
         db.execSQL("UPDATE COMPTE SET TEAMSIZE=TEAMSIZE+1");
+        db.execSQL("UPDATE EQUIPE SET INTEAM=1 WHERE ID = (SELECT MAX(ID) FROM EQUIPE WHERE INTEAM=0)");
     }
 
     public BDDCompte selectCompte()
